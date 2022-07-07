@@ -1,0 +1,25 @@
+---------------------- update heroke in terminal:  ----------------------
+heroku login
+heroku help
+heroku apps
+heroku info -a query-gra # Git URL:        https://git.heroku.com/query-gra.git
+heroku plugins:install heroku-repo # Heroku Repo plugin
+heroku repo:reset -a query-m # delete the git repo on the server
+
+git push remote gra:master  # push & bild вin cheroku (add remote 'gra' in intellyJ/menu/git/Manage Remotes)
+
+git init  # create git repo
+git add .  # add all (use .gitignore) to repo
+git remote -v # list all remote
+git fetch bitbucket
+git push remote_name # push current branch to remote_name
+git push --set-upstream --force fullWeb master # rewrite master on fullWeb
+git checkout  -b noisecar bitbucket/noisecar  # load branch noisecar from remote bitbucket
+
+----------------------- # transfer commits from one branch to another (cherry pick) without commit ------------
+# first go to branch where to transfer
+git cherry-pick -n  2b4777b9~..query-gra   # from next commit from 2b4777b9
+
+git branch -m query-dev    # rename local branch
+
+git checkout --orphan new_branch #  create new branch and purge all the history

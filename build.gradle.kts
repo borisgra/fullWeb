@@ -1,0 +1,190 @@
+@file:Suppress("UNUSED_VARIABLE")
+
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
+
+val serializationVersion = "1.3.2"
+val ktorVersion = "1.6.8"
+
+plugins {
+    kotlin("multiplatform") version "1.7.0"
+    application //to run JVM part
+    kotlin("plugin.serialization") version "1.7.0"
+}
+
+group = "org.example"
+version = "1.0.${lastNumberCommit()}-${gitCommitHash()}"
+
+repositories {
+    google()
+    mavenCentral()
+    @Suppress("DEPRECATION")
+    jcenter() // deprecated in gradle 8.0 (now for kotlin("multiplatform") )
+}
+
+kotlin {
+    jvm {
+        withJava()
+    }
+    js {
+        browser {
+            binaries.executable()
+        }
+    }
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(kotlin("stdlib-common"))
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+//                https://github.com/Kotlin/kotlinx-datetime#using-in-your-projects
+//                https://resources.jetbrains.com/storage/products/kotlin/events/kotlin14/Slides/datetime%20.pdf
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.3")
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-serialization:$ktorVersion")
+                implementation("io.ktor:ktor-server-core:$ktorVersion")
+                implementation("io.ktor:ktor-server-netty:$ktorVersion")
+                implementation("ch.qos.logback:logback-classic:1.2.3")
+                implementation("io.ktor:ktor-websockets:$ktorVersion")
+                implementation("org.postgresql:postgresql:42.4.0")
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-js:$ktorVersion") //include http&websockets
+                implementation("io.ktor:ktor-client-json-js:$ktorVersion")
+                implementation("io.ktor:ktor-client-serialization-js:$ktorVersion")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+                implementation("org.jetbrains:kotlin-react:17.0.1-pre.146-kotlin-1.4.30")
+                implementation("org.jetbrains:kotlin-react-dom:17.0.1-pre.146-kotlin-1.4.30")
+                implementation(npm("react", "18.2.0"))
+                implementation(npm("react-dom", "18.2.0"))
+
+                //Kotlin Styled
+                implementation("org.jetbrains:kotlin-styled:5.2.1-pre.146-kotlin-1.4.30")
+                implementation(npm("styled-components", "~5.3.5"))
+                implementation(npm("inline-style-prefixer", "~6.0.1"))
+//                https://discuss.kotlinlang.org/t/kotlin-js-a-style-from-the-npm-package/16759/3
+                implementation(npm("css-loader", "6.7.1"))
+                implementation(npm("style-loader", "3.3.1"))
+
+                implementation(npm("react-share", "~4.4.0"))//https://www.npmjs.com/package/react-share
+
+                implementation(npm("ag-grid-community", "~27.3.0")) // https://www.npmjs.com/package/ag-grid-community
+                implementation(npm("ag-grid-enterprise", "~27.3.0")) // https://www.npmjs.com/package/ag-grid-community
+                implementation(npm("ag-grid-react", "~27.3.0")) // https://www.npmjs.com/package/ag-grid-community
+            }
+        }
+    }
+}
+
+application {// https://docs.gradle.org/current/userguide/application_plugin.html
+//    mainClassName = "ServerKt"
+    mainClass.set("ServerKt")
+}
+
+// include JS artifacts in any JAR we generate
+tasks.getByName<Jar>("jvmJar") {
+    val taskName = if (project.hasProperty("isProduction")) {
+        "jsBrowserProductionWebpack"
+    } else {
+        "jsBrowserDevelopmentWebpack"
+    }
+    val webpackTask = tasks.getByName<KotlinWebpack>(taskName)
+    dependsOn(webpackTask) // make sure JS gets compiled first
+    from(File(webpackTask.destinationDirectory, webpackTask.outputFileName)) // bring output file along into the JAR
+}
+
+tasks {
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+}
+
+distributions {
+    main {
+        contents {
+            from("$buildDir/libs") {
+                rename("${rootProject.name}-jvm", rootProject.name)
+                into("lib")
+            }
+        }
+    }
+}
+
+// Alias "installDist" as "stage" (for cloud providers)
+tasks.create("stage") {
+    dependsOn(tasks.getByName("installDist"))
+}
+
+tasks.getByName<JavaExec>("run") {
+    classpath(tasks.getByName<Jar>("jvmJar")) // so that the JS artifacts generated by `jvmJar` can be found and served
+}
+
+//https://stackoverflow.com/questions/35421699/how-to-invoke-external-command-from-within-kotlin-code/41495542#41495542
+fun String.runCommand(
+    workingDir: File = File("."),
+    timeoutAmount: Long = 60,
+    timeoutUnit: TimeUnit = TimeUnit.SECONDS
+) = runCatching {
+    ProcessBuilder("\\s".toRegex().split(this))
+        .directory(workingDir)
+        .redirectOutput(ProcessBuilder.Redirect.PIPE)
+        .redirectError(ProcessBuilder.Redirect.PIPE)
+        .start().also { it.waitFor(timeoutAmount, timeoutUnit) }
+        .inputStream.bufferedReader().readText()
+}.onFailure { it.printStackTrace() }.getOrNull()
+    ?.replace("\n", "") ?: ""
+
+fun gitCommitHash() =
+    "git rev-parse --verify --short HEAD"
+        .runCommand()
+
+
+fun lastNumberCommit() =
+    "git rev-list --first-parent --count HEAD" // current HEAD commit
+        .runCommand()
+
+//https://blog.jdriven.com/2021/04/gradle-goodness-create-properties-file-with-writeproperties-task/
+tasks {
+    "${lastNumberCommit()}-${gitCommitHash()}"
+        .also { version ->
+            val projectProps by registering(WriteProperties::class) {
+                description = "Write project properties in a file."
+
+                // Set output file to build/project.properties
+                outputFile = file("./project.properties")
+                // Default encoding is ISO-8559-1, here we change it.
+                encoding = "UTF-8"
+                // Optionally we can specify the header comment.
+                comment = "Version and others"
+
+                // Define property.
+                property("git.version", version)
+
+                // Define properties using a Map.
+                properties(mapOf("project.version" to project.version, "project.name" to project.name))
+                println("properties: ${properties.toSortedMap()}")
+            }
+
+            if (version != "-")
+                processResources {
+                    // Depend on output of the task to create properties,
+                    // so the properties file will be part of the Java resources.
+                    from(projectProps)
+                }
+        }
+}

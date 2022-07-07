@@ -1,0 +1,217 @@
+15,olympic-winners_ro,https://www.ag-grid.com/example-assets/olympic-winners.json,"",Olympic winners (from lihk),external,
+98,Olympic winners (Error),https://www.ag-grid.com/example-assets/olympic-winners_err.json,"field:athlete;
+field:age,type: numericColumn,filter: agNumberColumnFilter ;
+field:country;
+field:year,type: numericColumn,filter: agNumberColumnFilter ;
+field:date,filter: agDateColumnFilter ;
+field:sport;
+field:gold,type: numericColumn,filter: agNumberColumnFilter ;
+field:silver,type: numericColumn,filter: agNumberColumnFilter ;
+field:bronze,type: numericColumn,filter: agNumberColumnFilter ;
+field:total,type: numericColumn,filter: agNumberColumnFilter ;
+",Olympic winners (Error),Construction,
+115,submenu,"","",LookUp lists,v_querys,
+48,"","","","daas,SOUNDFROOFING,Feed (querym),external",All Query,""
+5,feeds_daas,bd/daas/jsonPG/v_feeds,"field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_type,cellEditor : agSelectCellEditor, 
+cellEditorParams:v_feed_type;
+field:feed_name;
+field:feed_price,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state,type: numericColumn,filter: agNumberColumnFilter ;
+",Foods for Order (daas),daas,
+51,feeds local,bd/local/jsonPG/v_feeds,"",feeds local,local,
+53,client_status_ro,bd/pg/jsonPG/v_status,"",Client status,LookUp lists,
+54,feed_type_ro,bd/pg/jsonPG/v_feed_type,"",List of dishes,LookUp lists,
+55,feeds_n,bd/pg/jsonPG/v_feeds_err,"field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_type,cellEditor : agSelectCellEditor, 
+cellEditorParams:v_feed_type;
+field:feed_name;
+field:feed_price,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state,type: numericColumn,filter: agNumberColumnFilter ;
+",feeds_n (Error),Construction,
+111,anymal_employee,bd/animal/jsonPG/employee,"field:employeeid,type: numericColumn,filter: agNumberColumnFilter ;
+field:lastname;
+field:firstname;
+field:title;
+field:reportsto,type: numericColumn,filter: agNumberColumnFilter ;
+field:birthdate,filter: agDateColumnFilter ;
+field:hiredate,filter: agDateColumnFilter ;
+field:address;
+field:city;
+field:state;
+field:country;
+field:postalcode;
+field:phone;
+field:fax;
+field:email;
+",Employee,Big Animal (PGSQL),""
+102,person local,bd/local/jsonPG/v_persons,"field:id,type: numericColumn,filter: agNumberColumnFilter ;
+field:status, cellEditor : agSelectCellEditor, 
+cellEditorParams:admin.foodmaker.feedmaker.client ;
+field:company;
+field:address;
+field:country;
+field:person_name;
+field:phone;
+field:write_date,filter: agDateColumnFilter ;
+field:user_mail;
+field:android_id;
+field:town;
+field:state;
+field:write_user;
+field:android_ids;
+",person local,local,
+114,v_querys,bd/QUERY_BD/jsonPG/v_querys,"field:id,editable: false; field:query; field:name; field:columns,cellEditor: agLargeTextCellEditor; field:heading; field:submenu; field:sql,cellEditor: agLargeTextCellEditor;",Запросы m,v_querys,""
+6,foods_daas,bd/daas/jsonPG/v_foods/and person_id>=464,"",Заказы клиентов  (daas)id>= 464,daas,
+50,foods_local,bd/local/jsonPG/v_foods,"",foods local,local,
+17,persons_daas,bd/daas/jsonPG/v_persons,"headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true;
+headerName: status 123, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor, 
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:true ;
+headerName: user_mail, field: user_mail, editable: true ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter ;
+headerName: android_id, field: android_id,editable: true ,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: ''agNumberColumnFilter'' ;",Персон DAAS,daas,
+41,v_users_ro,bd/daas_nma/jsonPG/v_users/ order by id desc limit 50,"field:id,type: numericColumn,filter: agNumberColumnFilter ;
+field:status;
+field:company;
+field:address;
+field:country;
+field:person_name;
+field:phone;
+field:account_google;
+field:write_date,filter: agDateColumnFilter ;
+field:user_mail;
+field:android_id;
+field:town;
+field:brand_material;
+field:region;
+",User Rednois(last 50)#,SOUNDFROOFING,""
+112,animal_customer,bd/animal/jsonPG/customer,"field:customerid,type: numericColumn,filter: agNumberColumnFilter ;
+field:firstname;
+field:lastname;
+field:company;
+field:address;
+field:city;
+field:state;
+field:country;
+field:postalcode;
+field:phone;
+field:fax;
+field:email;
+field:supportrepid,type: numericColumn,filter: agNumberColumnFilter ;
+",Customer,Big Animal (PGSQL),""
+116,animal_invoice,bd/animal/jsonPG/invoice,"",Invoice,Big Animal (PGSQL),""
+2,feeds,bd/querym/jsonPG/v_feeds,"",Foods for Order,Feed (querym),
+16,foodorders_ro,bd/querym/jsonPG/v_foodorders,"",Order's feeds,Feed (querym),
+113,animal_ArtistsAlbum_ro,bd/animal/jsonPG/artistsAlbum,"",Artist's album,Big Animal (PGSQL),"select (select name from artist ar where ar.artistid = al.artistid ) as artistName,
+title
+from album al
+order by artistname"
+117,animal_ArtistsAlbumCount_ro,bd/animal/jsonPG/artistsAlbumCount,"",Artist's album count,Big Animal (PGSQL),"select (select name from artist ar where ar.artistid = al.artistid ) as artistName,
+count(*) TileCount
+from album al
+group by artistName
+order by artistname"
+47,"","","","local,v_querys",Construction,
+118,"","","","",Big Animal (PGSQL),""
+77,v_persons_order,bd/pg/jsonPG/v_persons/ order by status,"headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true;
+headerName: status 123, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor, 
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:true ;
+headerName: user_mail, field: user_mail, editable: true ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter ;
+headerName: android_id, field: android_id,editable: true ,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: ''agNumberColumnFilter'' ;",Without Clients,All Query,"select * from v_persons
+where status in (''admin'',''feedmaker'',
+''foodmaker'')"
+76,v_history_last50_ro,bd/daas_nma/jsonPG/v_history/ order by id desc limit 50,"field:id,type: numericColumn,filter: agNumberColumnFilter ;
+field:noiseparty_tag;
+field:description;
+field:user_name;
+field:write_date,filter: agDateColumnFilter ;
+field:info;
+field:record_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:user_mail;
+field:android_id;
+field:car_plate;
+field:user_country;
+field:address;
+field:person_name;
+field:phone;
+field:town;
+field:car_brand;
+field:car_model;
+field:car_country;
+field:car_type;
+field:car_manuf_year,type: numericColumn,filter: agNumberColumnFilter ;
+field:record_utc,type: numericColumn,filter: agNumberColumnFilter ;
+field:tags;
+field:company;
+",History Rednois(last 50),SOUNDFROOFING,
+100,Заказы клиентов ВСЕ,bd/daas/jsonPG/v_foods,"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:person_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;
+",Заказы клиентов ВСЕ,daas,
+3,persons,bd/querym/jsonPG/v_persons,"headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true;
+headerName: status 123, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor, 
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:true ;
+headerName: user_mail, field: user_mail, editable: true ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter ;
+headerName: android_id, field: android_id,editable: false,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: ''agNumberColumnFilter'' ;",Clients  - querym,Feed (querym),
+99,foods,bd/querym/jsonPG/v_foods,"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:person_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;",foods PG,Feed (querym),
+42,v_history_ro,bd/daas_nma/jsonPG/v_history,"field:id,type: numericColumn,filter: agNumberColumnFilter ;
+field:noiseparty_tag;
+field:description;
+field:user_name;
+field:write_date,filter: agDateColumnFilter ;
+field:info;
+field:record_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:user_mail;
+field:android_id;
+field:car_plate;
+field:user_country;
+field:address;
+field:person_name;
+field:phone;
+field:town;
+field:car_brand;
+field:car_model;
+field:car_country;
+field:car_type;
+field:car_manuf_year,type: numericColumn,filter: agNumberColumnFilter ;
+field:record_utc,type: numericColumn,filter: agNumberColumnFilter ;
+field:tags;
+field:company;
+",History Rednois(All)#,SOUNDFROOFING,""

@@ -1,0 +1,249 @@
+-----------------for newbase ----------------------------
+CREATE TABLE IF NOT EXISTS public.querys_m_m
+(
+    id  SERIAL,
+    name character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    query character varying(250) COLLATE pg_catalog."default",
+    columns character varying(1000) COLLATE pg_catalog."default",
+    heading character varying(200) COLLATE pg_catalog."default",
+    submenu character varying COLLATE pg_catalog."default",
+    sql character varying(1000) COLLATE pg_catalog."default",
+    CONSTRAINT books_pke_m PRIMARY KEY (id)
+);
+
+CREATE OR REPLACE VIEW public.v_querys
+ AS
+ SELECT querys.id,
+    querys.name,
+    querys.query,
+    querys.columns,
+    querys.heading,
+    querys.submenu,
+    querys.sql
+   FROM querys_m querys;
+
+CREATE OR REPLACE VIEW public.v_querys_sql
+ AS
+ SELECT querys.id,
+    querys.name,
+    querys.query,
+    querys.sql
+   FROM querys_m querys;
+
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (15, 'olympic-winners_ro', 'https://www.ag-grid.com/example-assets/olympic-winners.json', '', 'Olympic winners (from lihk)', 'external', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (98, 'Olympic winners (Error)', 'https://www.ag-grid.com/example-assets/olympic-winners_err.json', 'field:athlete;
+field:age,type: numericColumn,filter: agNumberColumnFilter ;
+field:country;
+field:year,type: numericColumn,filter: agNumberColumnFilter ;
+field:date,filter: agDateColumnFilter ;
+field:sport;
+field:gold,type: numericColumn,filter: agNumberColumnFilter ;
+field:silver,type: numericColumn,filter: agNumberColumnFilter ;
+field:bronze,type: numericColumn,filter: agNumberColumnFilter ;
+field:total,type: numericColumn,filter: agNumberColumnFilter ;
+', 'Olympic winners (Error)', 'Construction', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (115, 'submenu', '', '', 'LookUp lists', 'v_querys', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (48, '', '', '', 'daas,SOUNDFROOFING,Feed (querym),external', 'All Query', '');
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (5, 'feeds_daas', 'bd/daas/jsonPG/v_feeds', 'field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_type,cellEditor : agSelectCellEditor,
+cellEditorParams:v_feed_type;
+field:feed_name;
+field:feed_price,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state,type: numericColumn,filter: agNumberColumnFilter ;
+', 'Foods for Order (daas)', 'daas', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (51, 'feeds local', 'bd/local/jsonPG/v_feeds', '', 'feeds local', 'local', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (53, 'client_status_ro', 'bd/pg/jsonPG/v_status', '', 'Client status', 'LookUp lists', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (54, 'feed_type_ro', 'bd/pg/jsonPG/v_feed_type', '', 'List of dishes', 'LookUp lists', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (55, 'feeds_n', 'bd/pg/jsonPG/v_feeds_err', 'field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_type,cellEditor : agSelectCellEditor,
+cellEditorParams:v_feed_type;
+field:feed_name;
+field:feed_price,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state,type: numericColumn,filter: agNumberColumnFilter ;
+', 'feeds_n (Error)', 'Construction', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (111, 'anymal_employee', 'bd/animal/jsonPG/employee', 'field:employeeid,type: numericColumn,filter: agNumberColumnFilter ;
+field:lastname;
+field:firstname;
+field:title;
+field:reportsto,type: numericColumn,filter: agNumberColumnFilter ;
+field:birthdate,filter: agDateColumnFilter ;
+field:hiredate,filter: agDateColumnFilter ;
+field:address;
+field:city;
+field:state;
+field:country;
+field:postalcode;
+field:phone;
+field:fax;
+field:email;
+', 'Employee', 'Big Animal (PGSQL)', '');
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (102, 'person local', 'bd/local/jsonPG/v_persons', 'field:id,type: numericColumn,filter: agNumberColumnFilter ;
+field:status, cellEditor : agSelectCellEditor,
+cellEditorParams:admin.foodmaker.feedmaker.client ;
+field:company;
+field:address;
+field:country;
+field:person_name;
+field:phone;
+field:write_date,filter: agDateColumnFilter ;
+field:user_mail;
+field:android_id;
+field:town;
+field:state;
+field:write_user;
+field:android_ids;
+', 'person local', 'local', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (114, 'v_querys', 'bd/QUERY_BD/jsonPG/v_querys', 'field:id,editable: false; field:query; field:name; field:columns,cellEditor: agLargeTextCellEditor; field:heading; field:submenu; field:sql,cellEditor: agLargeTextCellEditor;', 'Запросы m', 'v_querys', '');
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (6, 'foods_daas', 'bd/daas/jsonPG/v_foods/and person_id>=464', '', 'Заказы клиентов  (daas)id>= 464', 'daas', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (50, 'foods_local', 'bd/local/jsonPG/v_foods', '', 'foods local', 'local', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (17, 'persons_daas', 'bd/daas/jsonPG/v_persons', 'headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true;
+headerName: status 123, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor,
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:true ;
+headerName: user_mail, field: user_mail, editable: true ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter ;
+headerName: android_id, field: android_id,editable: true ,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: ''agNumberColumnFilter'' ;', 'Персон DAAS', 'daas', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (41, 'v_users_ro', 'bd/daas_nma/jsonPG/v_users/ order by id desc limit 50', 'field:id,type: numericColumn,filter: agNumberColumnFilter ;
+field:status;
+field:company;
+field:address;
+field:country;
+field:person_name;
+field:phone;
+field:account_google;
+field:write_date,filter: agDateColumnFilter ;
+field:user_mail;
+field:android_id;
+field:town;
+field:brand_material;
+field:region;
+', 'User Rednois(last 50)#', 'SOUNDFROOFING', '');
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (112, 'animal_customer', 'bd/animal/jsonPG/customer', 'field:customerid,type: numericColumn,filter: agNumberColumnFilter ;
+field:firstname;
+field:lastname;
+field:company;
+field:address;
+field:city;
+field:state;
+field:country;
+field:postalcode;
+field:phone;
+field:fax;
+field:email;
+field:supportrepid,type: numericColumn,filter: agNumberColumnFilter ;
+', 'Customer', 'Big Animal (PGSQL)', '');
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (116, 'animal_invoice', 'bd/animal/jsonPG/invoice', '', 'Invoice', 'Big Animal (PGSQL)', '');
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (2, 'feeds', 'bd/querym/jsonPG/v_feeds', '', 'Foods for Order', 'Feed (querym)', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (16, 'foodorders_ro', 'bd/querym/jsonPG/v_foodorders', '', 'Order''s feeds', 'Feed (querym)', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (113, 'animal_ArtistsAlbum_ro', 'bd/animal/jsonPG/artistsAlbum', '', 'Artist''s album', 'Big Animal (PGSQL)', 'select (select name from artist ar where ar.artistid = al.artistid ) as artistName,
+title
+from album al
+order by artistname');
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (117, 'animal_ArtistsAlbumCount_ro', 'bd/animal/jsonPG/artistsAlbumCount', '', 'Artist''s album count', 'Big Animal (PGSQL)', 'select (select name from artist ar where ar.artistid = al.artistid ) as artistName,
+count(*) TileCount
+from album al
+group by artistName
+order by artistname');
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (47, '', '', '', 'local,v_querys', 'Construction', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (118, '', '', '', '', 'Big Animal (PGSQL)', '');
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (77, 'v_persons_order', 'bd/pg/jsonPG/v_persons/ order by status', 'headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true;
+headerName: status 123, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor,
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:true ;
+headerName: user_mail, field: user_mail, editable: true ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter ;
+headerName: android_id, field: android_id,editable: true ,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: ''agNumberColumnFilter'' ;', 'Without Clients', 'All Query', 'select * from v_persons
+where status in (''admin'',''feedmaker'',
+''foodmaker'')');
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (76, 'v_history_last50_ro', 'bd/daas_nma/jsonPG/v_history/ order by id desc limit 50', 'field:id,type: numericColumn,filter: agNumberColumnFilter ;
+field:noiseparty_tag;
+field:description;
+field:user_name;
+field:write_date,filter: agDateColumnFilter ;
+field:info;
+field:record_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:user_mail;
+field:android_id;
+field:car_plate;
+field:user_country;
+field:address;
+field:person_name;
+field:phone;
+field:town;
+field:car_brand;
+field:car_model;
+field:car_country;
+field:car_type;
+field:car_manuf_year,type: numericColumn,filter: agNumberColumnFilter ;
+field:record_utc,type: numericColumn,filter: agNumberColumnFilter ;
+field:tags;
+field:company;
+', 'History Rednois(last 50)', 'SOUNDFROOFING', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (100, 'Заказы клиентов ВСЕ', 'bd/daas/jsonPG/v_foods', 'field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:person_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;
+', 'Заказы клиентов ВСЕ', 'daas', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (3, 'persons', 'bd/querym/jsonPG/v_persons', 'headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true;
+headerName: status 123, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor,
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:true ;
+headerName: user_mail, field: user_mail, editable: true ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter ;
+headerName: android_id, field: android_id,editable: false,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: ''agNumberColumnFilter'' ;', 'Clients  - querym', 'Feed (querym)', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (99, 'foods', 'bd/querym/jsonPG/v_foods', 'field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:person_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;', 'foods PG', 'Feed (querym)', NULL);
+INSERT INTO public.querys_m (id, name, query, columns, heading, submenu, sql) VALUES (42, 'v_history_ro', 'bd/daas_nma/jsonPG/v_history', 'field:id,type: numericColumn,filter: agNumberColumnFilter ;
+field:noiseparty_tag;
+field:description;
+field:user_name;
+field:write_date,filter: agDateColumnFilter ;
+field:info;
+field:record_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:user_mail;
+field:android_id;
+field:car_plate;
+field:user_country;
+field:address;
+field:person_name;
+field:phone;
+field:town;
+field:car_brand;
+field:car_model;
+field:car_country;
+field:car_type;
+field:car_manuf_year,type: numericColumn,filter: agNumberColumnFilter ;
+field:record_utc,type: numericColumn,filter: agNumberColumnFilter ;
+field:tags;
+field:company;
+', 'History Rednois(All)#', 'SOUNDFROOFING', '');
