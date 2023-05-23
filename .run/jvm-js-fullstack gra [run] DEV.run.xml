@@ -1,0 +1,34 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="jvm-js-fullstack gra [run] DEV" type="GradleRunConfiguration" factoryName="Gradle">
+    <ExternalSystemSettings>
+      <option name="env">
+        <map>
+          <entry key="ADMIN_PASSW0" value="000000" />
+          <entry key="DATABASE_TIMEOUT" value="15" />
+          <entry key="DATABASE_URL_animal" value="postgres://demo:password@p-vmpc7c40fm.pg.biganimal.io:5432/chinook?sslmode=require" />
+          <entry key="DATABASE_URL_elephant_joqivmzw" value="postgres://joqivmzw:z7nN3urmH1hih-PXS0rA-PzvBX8LPiWd@otto.db.elephantsql.com/joqivmzw" />
+          <entry key="DATABASE_URL_local" value="postgres://foUser:12345@localhost:54320/fo2_eu" />
+          <entry key="QUERY_BD" value="elephant_joqivmzw" />
+          <entry key="q_1" value="https://www.ag-grid.com/example-assets/olympic-winners.json" />
+        </map>
+      </option>
+      <option name="executionName" />
+      <option name="externalProjectPath" value="$PROJECT_DIR$" />
+      <option name="externalSystemIdString" value="GRADLE" />
+      <option name="scriptParameters" value="" />
+      <option name="taskDescriptions">
+        <list />
+      </option>
+      <option name="taskNames">
+        <list>
+          <option value="run" />
+        </list>
+      </option>
+      <option name="vmOptions" />
+    </ExternalSystemSettings>
+    <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+    <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+    <DebugAllEnabled>false</DebugAllEnabled>
+    <method v="2" />
+  </configuration>
+</component>

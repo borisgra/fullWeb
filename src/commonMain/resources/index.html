@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!-- for query http:// -->
+    <link rel="icon" type="image/png" href="img/fav.png">
+    <title>Querys</title>
+    <link href="css/querys.css" rel="stylesheet"/>
+    <link href="css/menu.css" rel="stylesheet"/>
+<!--for brython-->
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.10.6/brython.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.10.6/brython_stdlib.js">
+    </script>
+<!--    <link rel="stylesheet" href="https://brython.info/brython.css">-->
+    <link rel="stylesheet" href="css/python.css">
+</head>
+<body>
+<script>
+pyTest = "import browser;browser.console.log('Hello Brython!');"
+eval(__BRYTHON__.python_to_js(pyTest));
+</script>
+<div id="root"></div>
+<script src="query-gra.js"></script>
+</body>
+</html>
