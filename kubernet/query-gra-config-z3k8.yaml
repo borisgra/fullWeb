@@ -1,0 +1,40 @@
+apiVersion: v1
+data:
+  DATABASE_URL_animal: postgres://demo:password@p-vmpc7c40fm.pg.biganimal.io:5432/chinook?sslmode=require
+  DATABASE_URL_croach_fo: postgresql://boris_gra_dev:19rJx0XFdFXGJgXgTOZ9qA@cockroach-gra-7066.5xj.cockroachlabs.cloud:26257/fo-elephant?sslmode=require
+  DATABASE_URL_elephant_joqivmzw: postgres://joqivmzw:z7nN3urmH1hih-PXS0rA-PzvBX8LPiWd@otto.db.elephantsql.com/joqivmzw
+  QUERY_BD: elephant_joqivmzw
+  SERVER_TYPE: http
+  jsr223: ok
+  q: https://www.ag-grid.com/example-assets/olympic-winners.json
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-07-08T08:05:08Z"
+  labels:
+    app: query-gra
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:DATABASE_URL_animal: {}
+        f:DATABASE_URL_croach_fo: {}
+        f:DATABASE_URL_daas_fo: {}
+        f:DATABASE_URL_daas_nma: {}
+        f:DATABASE_URL_elephant_joqivmzw: {}
+        f:QUERY_BD: {}
+        f:SERVER_TYPE: {}
+        f:jsr223: {}
+        f:q: {}
+      f:metadata:
+        f:labels:
+          .: {}
+          f:app: {}
+    manager: GoogleCloudConsole
+    operation: Update
+    time: "2023-07-08T08:40:40Z"
+  name: query-gra-config-z3k8
+  namespace: default
+  resourceVersion: "17974"
+  uid: 30e63a57-0016-4937-bdbc-225a46b667c2

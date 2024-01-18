@@ -1,0 +1,36 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="DockerFile-jar" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+    <deployment type="dockerfile">
+      <settings>
+        <option name="imageTag" value="borisgra/query-gra:jar" />
+        <option name="containerName" value="fullweb" />
+        <option name="envVars">
+          <list>
+            <DockerEnvVarImpl>
+              <option name="name" value="ADMIN_PASSW" />
+              <option name="value" value="+++" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="DATABASE_URL_elephant_joqivmzw" />
+              <option name="value" value="postgres://joqivmzw:z7nN3urmH1hih-PXS0rA-PzvBX8LPiWd@otto.db.elephantsql.com/joqivmzw" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="QUERY_BD" />
+              <option name="value" value="elephant_joqivmzw" />
+            </DockerEnvVarImpl>
+          </list>
+        </option>
+        <option name="portBindings">
+          <list>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="9090" />
+              <option name="hostPort" value="5004" />
+            </DockerPortBindingImpl>
+          </list>
+        </option>
+        <option name="sourceFilePath" value="Dockerfile-jar" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

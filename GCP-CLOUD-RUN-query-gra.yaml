@@ -1,0 +1,90 @@
+apiVersion: serving.knative.dev/v1
+kind: Revision
+metadata:
+  name: query-gra-00017-5qk
+  namespace: '907412932172'
+  selfLink: /apis/serving.knative.dev/v1/namespaces/907412932172/revisions/query-gra-00017-5qk
+  uid: f07be982-a062-42fe-b509-266b4dbe15e1
+  resourceVersion: AAYAlsw/ztI
+  generation: 1
+  creationTimestamp: '2023-07-16T07:43:06.477607Z'
+  labels:
+    serving.knative.dev/route: query-gra
+    serving.knative.dev/configuration: query-gra
+    client.knative.dev/nonce: 4b6f1e02-ead7-4e20-b21b-fdc0b176fde5
+    serving.knative.dev/configurationGeneration: '17'
+    serving.knative.dev/service: query-gra
+    serving.knative.dev/serviceUid: 6275a0dc-10e9-4176-b40c-707808c37552
+    cloud.googleapis.com/location: us-central1
+    run.googleapis.com/startupProbeType: Default
+  annotations:
+    run.googleapis.com/client-name: cloud-console
+    serving.knative.dev/creator: boris.gra.dev@gmail.com
+    autoscaling.knative.dev/maxScale: '1'
+    run.googleapis.com/operation-id: 38508a44-0f13-4171-8a41-3bdefa8b86cb
+  ownerReferences:
+  - kind: Configuration
+    name: query-gra
+    uid: a75692e7-c3a3-40f3-80aa-46503c54c3b0
+    apiVersion: serving.knative.dev/v1
+    controller: true
+    blockOwnerDeletion: true
+spec:
+  containerConcurrency: 40
+  timeoutSeconds: 50
+  serviceAccountName: 907412932172-compute@developer.gserviceaccount.com
+  containers:
+  - name: query-gra-1
+    image: docker.io/borisgra/query-gra@sha256:9c413c7f984d2da9ad3d95d80d8cf697d8cf61c50b7bc1ec6f187a8aed65a82c
+    ports:
+    - name: http1
+      containerPort: 8080
+    env:
+    - name: ADMIN_PASSW
+      value: +++
+    - name: DATABASE_TIMEOUT
+      value: '10'
+    - name: DATABASE_URL_elephant_joqivmzw
+      value: postgres://joqivmzw:z7nN3urmH1hih-PXS0rA-PzvBX8LPiWd@otto.db.elephantsql.com/joqivmzw
+    - name: DATABASE_URL_daas_nma
+      value: postgres://foUser:ablamtinas+12345@db.daas.team:5432/nma
+    - name: DATABASE_URL_croach_fo
+      value: postgresql://boris_gra_dev:19rJx0XFdFXGJgXgTOZ9qA@cockroach-gra-7066.5xj.cockroachlabs.cloud:26257/fo-elephant?sslmode=require
+    - name: DATABASE_URL_base1
+      value: postgresql://username:password@host:port/database?sslmode=require
+    - name: QUERY_BD
+      value: elephant_joqivmzw
+    - name: q
+      value: https://www.ag-grid.com/example-assets/olympic-winners.json
+    resources:
+      limits:
+        cpu: 4000m
+        memory: 4Gi
+    startupProbe:
+      timeoutSeconds: 240
+      periodSeconds: 240
+      failureThreshold: 1
+      tcpSocket:
+        port: 8080
+status:
+  observedGeneration: 1
+  conditions:
+  - type: Ready
+    status: 'True'
+    lastTransitionTime: '2023-07-16T07:43:17.169243Z'
+  - type: Active
+    status: 'True'
+    lastTransitionTime: '2023-07-16T07:43:22.232839Z'
+    severity: Info
+  - type: ContainerHealthy
+    status: 'True'
+    lastTransitionTime: '2023-07-16T07:43:17.078203Z'
+  - type: ResourcesAvailable
+    status: 'True'
+    lastTransitionTime: '2023-07-16T07:43:14.133308Z'
+    severity: Error
+  logUrl: https://console.cloud.google.com/logs/viewer?project=vpn-gra&resource=cloud_run_revision/service_name/query-gra/revision_name/query-gra-00017-5qk&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22query-gra%22%0Aresource.labels.revision_name%3D%22query-gra-00017-5qk%22
+  imageDigest: docker.io/borisgra/query-gra@sha256:9c413c7f984d2da9ad3d95d80d8cf697d8cf61c50b7bc1ec6f187a8aed65a82c
+  containerStatuses:
+  - name: query-gra-1
+    imageDigest: docker.io/borisgra/query-gra@sha256:9c413c7f984d2da9ad3d95d80d8cf697d8cf61c50b7bc1ec6f187a8aed65a82c

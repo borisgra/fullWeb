@@ -1,0 +1,247 @@
+-----------------for newbase ----------------------------
+CREATE TABLE IF NOT EXISTS public.querys
+(
+    id  SERIAL,
+    name character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    query character varying(250) COLLATE pg_catalog."default",
+    columns character varying(1000) COLLATE pg_catalog."default",
+    heading character varying(200) COLLATE pg_catalog."default",
+    submenu character varying COLLATE pg_catalog."default",
+    sql character varying(1000) COLLATE pg_catalog."default",
+    CONSTRAINT books_pkey PRIMARY KEY (id)
+);
+
+CREATE OR REPLACE VIEW public.v_querys
+ AS
+ SELECT querys.id,
+    querys.name,
+    querys.query,
+    querys.columns,
+    querys.heading,
+    querys.submenu,
+    CASE
+                WHEN COALESCE(querys.sql, ''::character varying)::text <> ''::text THEN length(querys.sql::text) || ' char'::text
+                ELSE NULL::text
+            END AS _sql
+
+   FROM querys querys;
+
+CREATE OR REPLACE VIEW public.v_querys_sql
+ AS
+ SELECT querys.id,
+    querys.name,
+    querys.query,
+    querys.sql
+   FROM querys querys;
+
+CREATE TABLE IF NOT EXISTS public.fd_persons
+(
+    id  SERIAL,
+    status character varying COLLATE pg_catalog."default",
+    company character varying COLLATE pg_catalog."default",
+    address character varying COLLATE pg_catalog."default",
+    country character varying COLLATE pg_catalog."default",
+    person_name character varying COLLATE pg_catalog."default",
+    phone character varying COLLATE pg_catalog."default",
+    write_date timestamp without time zone,
+    user_mail character varying COLLATE pg_catalog."default",
+    android_id character varying COLLATE pg_catalog."default",
+    town character varying COLLATE pg_catalog."default",
+    state character varying COLLATE pg_catalog."default",
+    write_user character varying COLLATE pg_catalog."default",
+    android_ids character varying COLLATE pg_catalog."default",
+    see_param boolean NOT NULL DEFAULT true,
+    CONSTRAINT fd_persons_pkey PRIMARY KEY (id)
+);
+
+CREATE OR REPLACE VIEW public.v_persons
+ AS
+ SELECT fd_persons.id,
+    fd_persons.status,
+    fd_persons.company,
+    fd_persons.address,
+    fd_persons.country,
+    fd_persons.person_name,
+    fd_persons.phone,
+    fd_persons.write_date,
+    fd_persons.user_mail,
+    fd_persons.android_id,
+    fd_persons.town,
+    fd_persons.state,
+    fd_persons.write_user,
+    fd_persons.android_ids
+   FROM fd_persons
+  WHERE COALESCE(fd_persons.state, ''::character varying)::text <> 'del'::text;
+
+CREATE TABLE IF NOT EXISTS public.fd_feeds
+(
+    feed_id SERIAL,
+    feed_type character varying COLLATE pg_catalog."default",
+    feed_name character varying COLLATE pg_catalog."default",
+    feed_date timestamp without time zone,
+    write_date timestamp without time zone,
+    write_user character varying COLLATE pg_catalog."default",
+    android_id character varying COLLATE pg_catalog."default",
+    state character varying COLLATE pg_catalog."default",
+    feed_parent_id character varying COLLATE pg_catalog."default",
+    feed_price numeric(13,0),
+    CONSTRAINT fd_feeds_pkey PRIMARY KEY (feed_id)
+);
+CREATE OR REPLACE VIEW public.v_feeds
+ AS
+ SELECT fd_feeds.feed_id,
+    fd_feeds.feed_type,
+    fd_feeds.feed_name,
+    fd_feeds.feed_price,
+    fd_feeds.feed_date,
+    fd_feeds.write_date,
+    fd_feeds.write_user,
+    fd_feeds.android_id,
+    fd_feeds.state
+   FROM fd_feeds
+  WHERE COALESCE(fd_feeds.state, ''::character varying)::text <> 'del'::text;
+
+CREATE TABLE IF NOT EXISTS public.fd_foods
+(
+    food_id SERIAL,
+    person_id integer NOT NULL,
+    feed_id integer NOT NULL,
+    food_qty numeric(13,0),
+    food_amount numeric(13,0),
+    food_date timestamp without time zone,
+    write_date timestamp without time zone,
+    write_user character varying COLLATE pg_catalog."default",
+    android_id character varying COLLATE pg_catalog."default",
+    state character varying COLLATE pg_catalog."default",
+    food_price numeric(13,0),
+    CONSTRAINT fd_foods_pkey PRIMARY KEY (food_id),
+    CONSTRAINT foods_feed_id FOREIGN KEY (feed_id)
+        REFERENCES public.fd_feeds (feed_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT foods_person_id FOREIGN KEY (person_id)
+        REFERENCES public.fd_persons (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);
+CREATE OR REPLACE VIEW public.v_foods
+ AS
+ SELECT fd_foods.food_id,
+    fd_foods.person_id,
+    fd_foods.feed_id,
+    fd_foods.food_qty,
+    fd_foods.food_amount,
+    fd_foods.food_date,
+    fd_foods.write_date,
+    fd_foods.write_user,
+    fd_foods.android_id,
+    fd_foods.state,
+    fd_foods.food_price
+   FROM fd_foods
+  WHERE COALESCE(fd_foods.state, ''::character varying)::text <> 'del'::text;
+
+  CREATE OR REPLACE VIEW public.v_foodorders
+   AS
+   SELECT foods.food_id,
+      foods.person_id,
+      foods.feed_id,
+      foods.food_qty,
+      foods.food_amount,
+      foods.food_date,
+      foods.write_date,
+      foods.write_user,
+      foods.android_id,
+      foods.state,
+      foods.food_price,
+      ( SELECT persons.person_name
+             FROM v_persons persons
+            WHERE persons.id = foods.person_id) AS person_name,
+      ( SELECT feeds.feed_name
+             FROM v_feeds feeds
+            WHERE feeds.feed_id = foods.feed_id) AS feed_name,
+      ( SELECT feeds.feed_type
+             FROM v_feeds feeds
+            WHERE feeds.feed_id = foods.feed_id
+           LIMIT 1) AS feed_type
+     FROM v_foods foods
+    WHERE 0 = 0;
+
+    CREATE OR REPLACE VIEW public.v_status
+     AS
+     SELECT DISTINCT fd_persons.status AS param
+       FROM fd_persons
+      WHERE fd_persons.status::text = ''::text OR fd_persons.status::text IS NOT NULL
+      ORDER BY fd_persons.status;
+      CREATE OR REPLACE VIEW public.v_feed_type
+       AS
+       SELECT DISTINCT fd_feeds.feed_type AS param
+         FROM fd_feeds
+        WHERE fd_feeds.feed_type::text = ''::text OR fd_feeds.feed_type IS NOT NULL
+        ORDER BY fd_feeds.feed_type;
+
+CREATE OR REPLACE VIEW public.r_foods
+ AS
+ SELECT ( SELECT persons.person_name
+           FROM v_persons persons
+          WHERE persons.id = foods.person_id) AS person_name,
+    ( SELECT feeds.feed_name
+           FROM v_feeds feeds
+          WHERE feeds.feed_id = foods.feed_id) AS feed_name,
+    ( SELECT feeds.feed_type
+           FROM v_feeds feeds
+          WHERE feeds.feed_id = foods.feed_id) AS feed_type,
+    foods.food_qty,
+    foods.food_price,
+    foods.food_amount,
+    date(foods.food_date) AS food_date,
+    foods.state
+   FROM v_foods foods
+  WHERE 0 = 0
+  ORDER BY foods.food_id DESC;
+
+CREATE OR REPLACE VIEW public.fd_persons_last_id
+ AS
+ SELECT max(fd_persons.id) AS id
+   FROM fd_persons
+  GROUP BY fd_persons.user_mail
+  ORDER BY (max(fd_persons.id)) DESC;
+
+CREATE OR REPLACE VIEW public.fd_feeds_last_id
+ AS
+ SELECT max(fd_feeds.feed_id) AS id
+   FROM fd_feeds
+  GROUP BY fd_feeds.feed_name
+  ORDER BY (max(fd_feeds.feed_id)) DESC;
+------------------------------------------------------------------
+CREATE ROLE "forInsert" WITH
+  NOLOGIN
+  NOSUPERUSER
+  INHERIT
+  NOCREATEDB
+  NOCREATEROLE
+  NOREPLICATION
+  VALID UNTIL 'infinity';
+
+  CREATE ROLE "forSelect" WITH
+    NOLOGIN
+    NOSUPERUSER
+    INHERIT
+    NOCREATEDB
+    NOCREATEROLE
+    NOREPLICATION
+    VALID UNTIL 'infinity';
+
+    CREATE ROLE "foUser" WITH
+      LOGIN
+      NOSUPERUSER
+      INHERIT
+      NOCREATEDB
+      NOCREATEROLE
+      NOREPLICATION
+      VALID UNTIL 'infinity';
+
+    GRANT "forInsert", "forSelect" TO "foUser";
+
+       GRANT SELECT ON TABLE public.v_querys TO "forSelect";
+       GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE public.v_querys TO "forInsert";
+       GRANT SELECT ON TABLE public.v_querys_sql TO "forSelect";

@@ -1,0 +1,51 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Docker Image" type="docker-deploy" factoryName="docker-image" singleton="false" server-name="Docker">
+    <deployment type="docker-image">
+      <settings>
+        <option name="imageTag" value="borisgra/query-gra:test" />
+        <option name="containerName" value="fullweb" />
+        <option name="envVars">
+          <list>
+            <DockerEnvVarImpl>
+              <option name="name" value="ADMIN_PASSW" />
+              <option name="value" value="+++" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="DATABASE_TIMEOUT" />
+              <option name="value" value="10" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="DATABASE_URL_elephant_joqivmzw" />
+              <option name="value" value="postgres://joqivmzw:z7nN3urmH1hih-PXS0rA-PzvBX8LPiWd@otto.db.elephantsql.com/joqivmzw" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="jsr223" />
+              <option name="value" value="hide" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="q" />
+              <option name="value" value="https://www.ag-grid.com/example-assets/olympic-winners.json" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="QUERY_BD" />
+              <option name="value" value="elephant_joqivmzw" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="BIG_QUERY_vpn-gra" />
+              <option name="value" value="{   &quot;type&quot;: &quot;service_account&quot;,   &quot;project_id&quot;: &quot;vpn-gra&quot;,   &quot;private_key_id&quot;: &quot;f9b710d8d35ec66ba37c942ad6cc3a8ad4c06c14&quot;,   &quot;private_key&quot;: &quot;-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDCupvC6FUdypI8\n5ikI/3iwQLiEzvzccQS2/lxnj1vMRBvMQUhRKXYms9XzOcOCUr4Jlfp25fc2wt7y\nesvqxludAMrU7XBWRFaruqpGg+eTqwuNqiEc5DVEIKmOYCD6AEVeoFZqo/RF0423\n+87nMlUB1T+sOhrvIGBWg/6evX5/Hm5gq3Fv3J1ME7kPQYtHwuOCJZV+vGKCp0B6\n/c6cjEQW62qkwXH6wsa8YdzytAx1so2BWWm8/C0VtvzcSWpBWZ3hxvo0B/scEwIA\nTfvZego+AwMPKs2C27GJTIFokyscauLNlqSjWT3Ua05n/sOxxOZr7rNqtaJAOJA7\n5cuJBtwrAgMBAAECggEADkYHGH8sN137tdVkc6GPnf0YfrpSDvHagnQG9PECrb3e\nUGyxRCsRsIjlFAo2D62d+sOQvjoMEr+vqj7LB19ZJBsvQvKmldmLhX9OGj4dRus2\nPRZCjW9tjMayIbAKgBjDUkosG26qKfDLBg3snsYciguwuktGDHonOvWQ6oosUAfw\n9W3HbdiHu8wy/JVnOn1uGgF5gUaLFpHsUO3lznUR/yCiAz6orgAJEsE3jK1jRxlO\ncRfmMzFppoKepHf0vmVKQZ+NwtFkyQ2HaDE0lwjZ3N4phKys0NAMrMN3tr2+py30\njD5m6to+xoP0lnt5FSF4JyyKk+81oJ/RdV570yMrjQKBgQD10I96f3wGOcrU6AxE\nj+2PEscLQjCcOhE8qgB1qhE5YJJc5a3gB6D2aAQGPT6VdbQ1fWRlDMB+3617FZuo\nFJJoCGyTQx6UcKBiex+yhzEdxCwWu3CZDTIdUHaM/gIhevQuz7frA+hNabK/5of2\nsnVy/Ygqn1yysJpDDbSWxCb4DwKBgQDKzCoF7wVDZXUbf5Hw7z0HXwFFjJPIyDwM\nYuNtO2ggRpBF8rJ6dTHMD0lHZdY+SBLeEuDL7cco4bU15zCTdu4zxDTx4sXFSlOJ\n+p5ptZz1ul1NShkbgJ7wc6Aq9Qbua8Ix85r3VnWs2Rm3zzQD3Q8z39ZcSff/HzRR\nyftjzzjeJQKBgEZbaZXAQ3lstTd3K3u8TlxzHXGFgnBU1nYsmnETOlbX40yfmMLU\nrCea4fv/L5iL1gaxWzjpC3fFAdyG9MSJDtakAp+ryGboTZ+iahIpS8+fRJdFExdb\nhYqKa0Qzt9xpWtbDMXsc5TKzHCx9CVF9Bszg8EZy0o96qMykcZntjtHVAoGATJ7Q\nrcc97NXTZh1PzYEGRNevSlCvsWd90Iw4MxgD4lXmwpbMuhm3Q8ruu8wNIyDmCAOH\n7WScH6UPaxs7Liv8GZDjFBTC9iR75aDL41Kbx/eusrnxPIPfCSgWdsR25vPNvkO0\n5AhFk5W+8sSVeXQ2/zlt6xaDXV+zy8cNdQthCAUCgYEA2rlOHUrn03M8PIadvkFz\nUDhVbgvKugWOhYN7hn1flQlr/fix5S3qTJy2+V7zvA7KMQH1cRbxedzL5amgC76P\nBB6l2t/K5N5GLH1FFuYgVAuBdgnWE4jn4Ap0pD79vv2QV5CNlFL7iSZFAML3mp+1\nZy9T0y6dU7nv8ErYIaB9bvo=\n-----END PRIVATE KEY-----\n&quot;,   &quot;client_email&quot;: &quot;myserviceaccount@vpn-gra.iam.gserviceaccount.com&quot;,   &quot;client_id&quot;: &quot;112099843480991782590&quot;,   &quot;auth_uri&quot;: &quot;https://accounts.google.com/o/oauth2/auth&quot;,   &quot;token_uri&quot;: &quot;https://oauth2.googleapis.com/token&quot;,   &quot;auth_provider_x509_cert_url&quot;: &quot;https://www.googleapis.com/oauth2/v1/certs&quot;,   &quot;client_x509_cert_url&quot;: &quot;https://www.googleapis.com/robot/v1/metadata/x509/myserviceaccount%40vpn-gra.iam.gserviceaccount.com&quot;,   &quot;universe_domain&quot;: &quot;googleapis.com&quot; }" />
+            </DockerEnvVarImpl>
+          </list>
+        </option>
+        <option name="portBindings">
+          <list>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="9090" />
+              <option name="hostPort" value="5004" />
+            </DockerPortBindingImpl>
+          </list>
+        </option>
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

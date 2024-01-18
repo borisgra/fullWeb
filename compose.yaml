@@ -1,0 +1,28 @@
+services:
+  query-gra:
+    container_name: query-gra
+    image: borisgra/query-gra:$FULLWEB_VERSION
+    build:
+      context: "."
+      args:
+        ORG_GRADLE_PROJECT_isProduction: $ORG_GRADLE_PROJECT_isProduction
+    volumes:
+      - ./.env:/app/.env
+    environment:
+      - PORT=$PORT
+      - DATABASE_URL_elephant_joqivmzw=$DATABASE_URL_elephant_joqivmzw
+      - DATABASE_URL_mybase1=postgresql://username:password@host:port/database?sslmode=require
+      - QUERY_BD=elephant_joqivmzw
+      - BIG_QUERY_vpn__gra=$BIG_QUERY_vpn__gra
+      - ADMIN_PASSW=+++
+#      - SERVER_TYPE=https  # http        if ERR_SSL_PROTOCOL_ERROR
+#      - jsr223=yes  # for use kotlin-compiler-embeddable (jsr232)
+    ports:
+      - "$PORT:$PORT"
+    restart: always
+
+
+#  sudo bash -c "$(curl -fsSL https://get.docker.com)"  # e2-small , g1-small
+# sudo docker compose up --build
+# sudo docker pull borisgra/query-gra:latest
+

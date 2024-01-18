@@ -1,0 +1,54 @@
+apiVersion: v1
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIELDCCApSgAwIBAgIQHbGsNcWgFv9BBaodi+gchDANBgkqhkiG9w0BAQsFADAv
+    MS0wKwYDVQQDEyRmYjk1MzFlNC05MjViLTRlZjUtOTI5OC1iOGRkNmMzOGE1MGQw
+    IBcNMjMwNzA4MDY1OTQ5WhgPMjA1MzA2MzAwNzU5NDlaMC8xLTArBgNVBAMTJGZi
+    OTUzMWU0LTkyNWItNGVmNS05Mjk4LWI4ZGQ2YzM4YTUwZDCCAaIwDQYJKoZIhvcN
+    AQEBBQADggGPADCCAYoCggGBALuAjyp47rZxT/BRLxLqy3OFjsQ52QHte0/qimd1
+    8yNcdEQdLkoPtclxbR7uwDT70OQm3Np1WEQ1Jgrr+KhTB82QF1+WGlQhuP/UYdtK
+    iR3ph0WfVpmSHny5KSpuJg7s4NZCmuXcEoJkTG2Bhp3a8HKQUaYmwprlDMo3nWqt
+    fB7XQARQlrKN2kl92nOUhSKv+Ske6o5ocJtoeW0XnUpSn07Qo3ytqmAX9tos3FD/
+    G5hd7nvzNym+QB3WzFGn2RdWZ4ezUmvtQ9JHv1xfIIQ/sJVicNR3k8THYPEFocw4
+    tqK/H8bHxe9Pa76azns1679fcDClqzJJPBklbviFEdUdEFMi/elXuq+EFG+I8fr0
+    UKZhhV3zBoN4ilrAEA56yTi+YbkA+n3cFbRZbWr1mMm9Lga4Ua1eIEXO2h9ZzzvC
+    HNwh4s0bK4cCvj2eZX8k+hoF0GwAkbsskM5Hi9uDJC0/RStyA0vNdEYhQFWFD6Z5
+    GLxBGLzpiGWuzw8R6SEZsTrJ8QIDAQABo0IwQDAOBgNVHQ8BAf8EBAMCAgQwDwYD
+    VR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQULFkDIo7W6/vFg9ro40S4IaxQug8wDQYJ
+    KoZIhvcNAQELBQADggGBAAWvsJBchl5u7R4uvZsufU2BujbExJ0ATFXwhYkV2z/K
+    hwnvpIwPJ9zWzzRNo8xsIuT/kSuq8T6j55GuhoziHX90zR1xsZgad0vS8UqaJUWr
+    gJwJmV25Sk3cxHB2VXND7EXKmt6DaUZCJHdgyle94/7K7Bpg/js/YAe9ElgCE85T
+    5iOmRHRbCyjKizZZx3E3vNtsTCIqYct4Xt3Z4IsXrWtiA9QZ23WUAaWzOsW5mJ1G
+    vLUY9OfQfyL849AUg0jzjHDEuIP+hO+0M81PTU/edd/uTdbxisMrLNG3Ap0uIHs3
+    WT1+7rkdESiTAZDSSrkRf9fUwEY8vl8A7rt5HHueD2LQqocnCWQrRWDHQJBJiCk+
+    OVEygmIHWNTqUvVLUiR/4NAJiHMjHynlhSBUCGUSDUQEMrgoWFB6K2aF3pabAgiV
+    3khOsEgT9qtMz2H8r4s0Ql5jxglZZRUvnSFBFKiSJzVlt72jxCqpH1Xa0cLMycIH
+    qFMDOY3ea5+HClf57KxdWQ==
+    -----END CERTIFICATE-----
+kind: ConfigMap
+metadata:
+  annotations:
+    kubernetes.io/description: Contains a CA bundle that can be used to verify the
+      kube-apiserver when using internal endpoints such as the internal service IP
+      or kubernetes.default.svc. No other usage is guaranteed across distributions
+      of Kubernetes clusters.
+  creationTimestamp: "2023-07-08T08:03:48Z"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:ca.crt: {}
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubernetes.io/description: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2023-07-08T08:03:48Z"
+  name: kube-root-ca.crt
+  namespace: kube-public
+  resourceVersion: "273"
+  uid: ba1adbba-09c8-418c-ac48-af7206332b4d
