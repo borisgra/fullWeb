@@ -1,0 +1,91 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: query-gra
+  namespace: '148641556397'
+  selfLink: /apis/serving.knative.dev/v1/namespaces/148641556397/services/query-gra
+  uid: 69f80d2b-cb10-4579-ab28-e2b95c10e5a7
+  resourceVersion: AAX/+U3OR2k
+  generation: 3
+  creationTimestamp: '2023-07-08T12:37:45.202527Z'
+  labels:
+    cloud.googleapis.com/location: us-central1
+  annotations:
+    run.googleapis.com/client-name: cloud-console
+    serving.knative.dev/creator: boris.gra.dev@gmail.com
+    serving.knative.dev/lastModifier: boris.gra.dev@gmail.com
+    run.googleapis.com/operation-id: 79834bac-5139-4eb1-b489-f56f55ee4c7b
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+spec:
+  template:
+    metadata:
+      labels:
+        client.knative.dev/nonce: 5c3b1a6f-53fb-41a3-bc8e-f23b0b3237f6
+        run.googleapis.com/startupProbeType: Default
+      annotations:
+        run.googleapis.com/client-name: cloud-console
+        autoscaling.knative.dev/minScale: '1'
+        autoscaling.knative.dev/maxScale: '1'
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      serviceAccountName: 148641556397-compute@developer.gserviceaccount.com
+      containers:
+        - image: borisgra/query-gra:latest
+          ports:
+            - name: http1
+              containerPort: 8080
+          env:
+            - name: ADMIN_PASSW
+              value: +++
+            - name: DATABASE_TIMEOUT
+              value: 15
+            - name: DATABASE_URL_elephant_joqivmzw
+              value: postgres://joqivmzw:z7nN3urmH1hih-PXS0rA-PzvBX8LPiWd@otto.db.elephantsql.com/joqivmzw
+            - name: DATABASE_URL_base1
+              value: postgresql://username:password@host:port/database?sslmode=require
+            - name: QUERY_BD
+              value: elephant_joqivmzw
+            - name: q
+              value: https://www.ag-grid.com/example-assets/olympic-winners.json
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+          startupProbe:
+            timeoutSeconds: 240
+            periodSeconds: 240
+            failureThreshold: 1
+            tcpSocket:
+              port: 8080
+  traffic:
+    - percent: 100
+      latestRevision: true
+status:
+  observedGeneration: 3
+  conditions:
+    - type: Ready
+      status: 'True'
+      lastTransitionTime: '2023-07-08T12:58:20.736554Z'
+    - type: ConfigurationsReady
+      status: 'True'
+      lastTransitionTime: '2023-07-08T12:58:04.244324Z'
+    - type: RoutesReady
+      status: 'True'
+      lastTransitionTime: '2023-07-08T12:58:20.857193Z'
+  latestReadyRevisionName: query-gra-00003-t46
+  latestCreatedRevisionName: query-gra-00003-t46
+  traffic:
+    - revisionName: query-gra-00003-t46
+      percent: 100
+      latestRevision: true
+  url: https://query-gra-xgr2vwnpza-uc.a.run.app
+  address:
+    url: https://query-gra-xgr2vwnpza-uc.a.run.app
+
+# https://blog.iron.io/aws-fargate-vs-google-cloud-run/
+# AWS  TASKs- https://us-east-1.console.aws.amazon.com/ecs/v2/task-definitions?region=us-east-1
+# Fargate CLSTERS https://us-east-1.console.aws.amazon.com/ecs/v2/clusters?region=us-east-1
+
+# https://us-east-1.console.aws.amazon.com/amplify/home?region=us-east-1#/

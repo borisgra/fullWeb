@@ -1,0 +1,11 @@
+# Project exclude paths
+/.gradle/
+/build/
+/build/classes/kotlin/jvm/main/
+/build/js/packages/vollstapel/kotlin/
+/.idea/
+/kotlin-js-store/
+/.run/
+/.kotlin/
+/src/commonMain/resources/config.properties
+/querys.crt
