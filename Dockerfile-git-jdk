@@ -1,0 +1,49 @@
+# !!!! Create image after build PRRODUCTON in IntelliJ - from github.com/borisgra/jvm-js-fullstack
+FROM eclipse-temurin:23-jdk-alpine AS my-jdk
+
+# required for strip-debug to work
+RUN apk add --no-cache binutils
+
+#https://careers.wolt.com/en/blog/tech/how-to-reduce-jvm-docker-image-size
+#https://stackoverflow.com/questions/55439599/sslhandshakeexception-with-jlink-created-runtime
+#https://habr.com/ru/companies/piter/articles/692992/
+#https://javadeveloperzone.com/common-error/java-lang-module-findexception-two-versions-module-found-outputmlib/
+# Build small JRE image
+#    --add-modules java.base,jdk.crypto.ec,java.management,java.naming,java.net.http,java.security.jgss,java.security.sasl,java.sql,jdk.httpserver,jdk.unsupported \
+RUN $JAVA_HOME/bin/jlink \
+    --verbose \
+    --add-modules java.base,java.sql,java.management,java.naming,jdk.unsupported \
+    --strip-debug \
+    --no-man-pages \
+    --no-header-files \
+    --compress=2 \
+    --output /customjre
+
+# main app image
+FROM alpine:latest
+ENV JAVA_HOME=/jre
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
+COPY --from=my-jdk /customjre $JAVA_HOME
+
+COPY --from=project --chmod=777 ./build/install/query-gra /app/
+
+WORKDIR /app/bin
+
+EXPOSE 9090
+
+CMD ["./query-gra"]
+#ENTRYPOINT [ "java", "-jar", "query-gra.jar" ]
+
+# wget -qO- https://raw.githubusercontent.com/borisgra/query-build/master/Dockerfile-git-jdk | docker buildx build -f -  --build-context project=https://borisgra@github.com/borisgra/query-build.git#master -t borisgra/query-gra:git-jdk .
+
+# docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra@github.com/borisgra/query-build.git#master  -t borisgra/query-gra:git-jdk .
+# docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra:<gihub_token>@github.com/borisgra/query-build.git#master -t borisgra/query-gra:git-jdk .
+# docker login -u borisgra
+# docker push borisgra/query-gra:git-jdk
+# sudo docker pull borisgra/query-gra:git-jdk
+# sudo docker run borisgra/query-gra:git-jdk -p 5004:5004
+#docker builder prune  # clear cache
+
+# docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra:<gihub_token>@github.com/borisgra/jvm-js-fullstack.git#build --progress=plain -t borisgra/query-gra:git-jdk . 2>&1 | tee build.log
+# df -h --total

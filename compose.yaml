@@ -1,0 +1,30 @@
+services:
+  query-gra:
+    container_name: query-gra
+    image: borisgra/query-gra:$FULLWEB_VERSION
+    build:
+      context: "."
+      args:
+        ORG_GRADLE_PROJECT_isProduction: $ORG_GRADLE_PROJECT_isProduction
+    volumes:
+      - ./.env:/app/.env
+    environment:
+      - PORT=$PORT
+      - DATABASE_URL_koyebdb=$DATABASE_URL_koyebdb
+      - DATABASE_URL_mybase1=postgresql://username:password@host:port/database?sslmode=require
+      - DATABASE_URL_koyeb_querys=$DATABASE_URL_koyeb_querys
+      - QUERY_BD=$QUERY_BD
+      - DATABASE_URL_yu_querys=$DATABASE_URL_yu_querys
+      - BIG_QUERY_vpn__gra=$BIG_QUERY_vpn__gra
+      - ADMIN_PASSW=$ADMIN_PASSW
+      - jsr223=$jsr223
+#      - SERVER_TYPE=https  # http        if ERR_SSL_PROTOCOL_ERROR
+    ports:
+      - "$PORT:$PORT"
+    restart: always
+
+
+#  sudo bash -c "$(curl -fsSL https://get.docker.com)"  # e2-small , g1-small
+# sudo docker compose up --build
+# sudo docker pull borisgra/query-gra:latest
+

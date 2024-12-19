@@ -1,0 +1,213 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "3"
+    deployment.kubernetes.io/max-replicas: "4"
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2023-07-08T08:05:08Z"
+  generation: 1
+  labels:
+    app: query-gra
+    pod-template-hash: 7458f4d8f8
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:deployment.kubernetes.io/desired-replicas: {}
+          f:deployment.kubernetes.io/max-replicas: {}
+          f:deployment.kubernetes.io/revision: {}
+        f:labels:
+          .: {}
+          f:app: {}
+          f:pod-template-hash: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"65ad7c2f-3a0d-4d8c-9e96-072290930fee"}: {}
+      f:spec:
+        f:replicas: {}
+        f:selector: {}
+        f:template:
+          f:metadata:
+            f:labels:
+              .: {}
+              f:app: {}
+              f:pod-template-hash: {}
+          f:spec:
+            f:containers:
+              k:{"name":"query-gra-1"}:
+                .: {}
+                f:env:
+                  .: {}
+                  k:{"name":"DATABASE_URL_animal"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      .: {}
+                      f:configMapKeyRef: {}
+                  k:{"name":"DATABASE_URL_croach_fo"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      .: {}
+                      f:configMapKeyRef: {}
+                  k:{"name":"DATABASE_URL_daas_fo"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      .: {}
+                      f:configMapKeyRef: {}
+                  k:{"name":"DATABASE_URL_daas_nma"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      .: {}
+                      f:configMapKeyRef: {}
+                  k:{"name":"DATABASE_URL_elephant_joqivmzw"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      .: {}
+                      f:configMapKeyRef: {}
+                  k:{"name":"QUERY_BD"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      .: {}
+                      f:configMapKeyRef: {}
+                  k:{"name":"SERVER_TYPE"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      .: {}
+                      f:configMapKeyRef: {}
+                  k:{"name":"jsr223"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      .: {}
+                      f:configMapKeyRef: {}
+                  k:{"name":"q"}:
+                    .: {}
+                    f:name: {}
+                    f:valueFrom:
+                      .: {}
+                      f:configMapKeyRef: {}
+                f:image: {}
+                f:imagePullPolicy: {}
+                f:name: {}
+                f:resources: {}
+                f:terminationMessagePath: {}
+                f:terminationMessagePolicy: {}
+            f:dnsPolicy: {}
+            f:restartPolicy: {}
+            f:schedulerName: {}
+            f:securityContext: {}
+            f:terminationGracePeriodSeconds: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2023-07-08T08:05:08Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:availableReplicas: {}
+        f:fullyLabeledReplicas: {}
+        f:observedGeneration: {}
+        f:readyReplicas: {}
+        f:replicas: {}
+    manager: kube-controller-manager
+    operation: Update
+    subresource: status
+    time: "2023-07-08T08:05:20Z"
+  name: query-gra-7458f4d8f8
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: query-gra
+    uid: 65ad7c2f-3a0d-4d8c-9e96-072290930fee
+  resourceVersion: "1398"
+  uid: 4db564f0-3577-4a20-a9c2-3e6d441251f9
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: query-gra
+      pod-template-hash: 7458f4d8f8
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: query-gra
+        pod-template-hash: 7458f4d8f8
+    spec:
+      containers:
+      - env:
+        - name: SERVER_TYPE
+          valueFrom:
+            configMapKeyRef:
+              key: SERVER_TYPE
+              name: query-gra-config-z3k8
+        - name: jsr223
+          valueFrom:
+            configMapKeyRef:
+              key: jsr223
+              name: query-gra-config-z3k8
+        - name: DATABASE_URL_elephant_joqivmzw
+          valueFrom:
+            configMapKeyRef:
+              key: DATABASE_URL_elephant_joqivmzw
+              name: query-gra-config-z3k8
+        - name: DATABASE_URL_croach_fo
+          valueFrom:
+            configMapKeyRef:
+              key: DATABASE_URL_croach_fo
+              name: query-gra-config-z3k8
+        - name: DATABASE_URL_daas_nma
+          valueFrom:
+            configMapKeyRef:
+              key: DATABASE_URL_daas_nma
+              name: query-gra-config-z3k8
+        - name: QUERY_BD
+          valueFrom:
+            configMapKeyRef:
+              key: QUERY_BD
+              name: query-gra-config-z3k8
+        - name: q
+          valueFrom:
+            configMapKeyRef:
+              key: q
+              name: query-gra-config-z3k8
+        - name: DATABASE_URL_animal
+          valueFrom:
+            configMapKeyRef:
+              key: DATABASE_URL_animal
+              name: query-gra-config-z3k8
+        - name: DATABASE_URL_daas_fo
+          valueFrom:
+            configMapKeyRef:
+              key: DATABASE_URL_daas_fo
+              name: query-gra-config-z3k8
+        image: borisgra/query-gra:jsr223
+        imagePullPolicy: IfNotPresent
+        name: query-gra-1
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 3
+  fullyLabeledReplicas: 3
+  observedGeneration: 1
+  readyReplicas: 3
+  replicas: 3

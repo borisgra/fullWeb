@@ -1,0 +1,29 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="DockerFile-my-jdk" type="docker-deploy" factoryName="dockerfile" server-name="Docker-22.04">
+    <deployment type="dockerfile">
+      <settings>
+        <option name="imageTag" value="borisgra/query-gra:my-jdk" />
+        <option name="containerName" value="fullweb" />
+        <option name="envVars">
+          <list>
+            <DockerEnvVarImpl>
+              <option name="name" value="jsr223" />
+              <option name="value" value="hide" />
+            </DockerEnvVarImpl>
+          </list>
+        </option>
+        <option name="portBindings">
+          <list>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="5004" />
+              <option name="hostPort" value="5004" />
+            </DockerPortBindingImpl>
+          </list>
+        </option>
+        <option name="commandLineOptions" value="--env-file .env" />
+        <option name="sourceFilePath" value="Dockerfile-my-jdk" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

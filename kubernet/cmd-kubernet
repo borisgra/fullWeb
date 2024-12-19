@@ -1,0 +1,25 @@
+https://linuxhint.com/kubectl-rollout-restart/ 
+https://cloud.google.com/kubernetes-engine/docs/how-to/updating-apps
+
+https://console.cloud.google.com/kubernetes/list/overview?project=gke-gra
+DEPLOY CONTAINER
+
+kubectl rollout restart deployment query-gra # restart
+kubectl set env deployment query-gra ADMIN_PASSW=qqq  # set env and restart
+kubectl scale deployments query-gra --replicas 0  # stop
+kubectl scale deployments query-gra --replicas  3  # start  > 0 
+
+kubectl rollout pause deployment query-gra  # pause rollout 
+kubectl rollout resume deployment query-gra # resume rollout 
+
+kubectl get deployments
+kubectl get deployment query-gra
+kubectl rollout status deployment query-gra
+kubectl get nodes
+kubectl get pods
+
+kubectl rollout undo deployments query-gra
+kubectl rollout undo deployment query-gra --to-revision 3
+
+kubectl rollout history deployment query-gra
+kubectl rollout history deployment query-gra --revision 3

@@ -1,0 +1,37 @@
+@charset 'utf-8';
+/* colors for highlighted Python code */
+span.python-string{
+    color: #27d;
+}
+span.python-comment{
+    color: #019;
+}
+span.python-keyword{
+    color: #950;
+}
+span.python-builtin{
+    color: #183;
+}
+
+em {
+  color:#339;
+  font-family:courier
+}
+
+strong {
+  color:#339;
+  font-family:courier;
+}
+
+button.nice{
+    margin-right: 15%;
+    color: #fff;
+    background: #7ae;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #45b;
+    text-align: center;
+    font-size: 15px;
+    padding: 6px;
+}

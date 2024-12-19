@@ -1,0 +1,30 @@
+# GCP Cloud BUILD
+#https://stackoverflow.com/questions/57175062/using-docker-buildkit-on-google-cloud-build
+steps:
+# Docker Build
+  - name: gcr.io/cloud-builders/docker
+    env:
+      - DOCKER_BUILDKIT=1
+    args:
+      - build
+      - '-f'
+      - Dockerfile-git-run
+      - '-t'
+#      - 'gcr.io/vpn-gra/github.com/borisgra/fullweb:$SHORT_SHA'
+      - 'us-central1-docker.pkg.dev/vpn-gra/query/fullweb:$SHORT_SHA'
+      - .
+
+  # Docker Push
+  - name: gcr.io/cloud-builders/docker
+    args: ['push',
+#           'gcr.io/vpn-gra/github.com/borisgra/fullweb:$SHORT_SHA']
+           'us-central1-docker.pkg.dev/vpn-gra/query/fullweb:$SHORT_SHA']
+timeout: 600s
+
+# PUBLIC ACCESS ! - https://stackoverflow.com/questions/71577703/how-do-i-make-a-artifact-stored-in-googles-artifact-registry-public
+#  1. Open the Repositories page in the Cloud Console.
+#  2. Select the appropriate repository.
+#  3. On the Permissions tab, click Add Member.
+#  4. In New members field, enter `allUsers`.
+#  5. Select the role Artifact Registry Reader.
+#  6. Set a per-user limit on Artifact Registry API requests to prevent misuse by unauthenticated users.

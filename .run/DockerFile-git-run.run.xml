@@ -1,0 +1,35 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="DockerFile-git-run" type="docker-deploy" factoryName="dockerfile" server-name="Docker-22.04">
+    <deployment type="dockerfile">
+      <settings>
+        <option name="imageTag" value="borisgra/query-gra:my-jdk" />
+        <option name="buildArgs">
+          <list>
+            <DockerEnvVarImpl>
+              <option name="name" value="NODE_VERSION" />
+              <option name="value" value="22.8.0" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="GIT_1" />
+              <option name="value" value="https://borisgra:TOKEN@github.com/borisgra/jvm-js-fullstack.git" />
+            </DockerEnvVarImpl>
+          </list>
+        </option>
+        <option name="buildCliOptions" value="--no-cache  --progress=plain" />
+        <option name="containerName" value="fullweb" />
+        <option name="portBindings">
+          <list>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="5004" />
+              <option name="hostPort" value="5004" />
+            </DockerPortBindingImpl>
+          </list>
+        </option>
+        <option name="commandLineOptions" value="--env-file .env " />
+        <option name="showCommandPreview" value="true" />
+        <option name="sourceFilePath" value="Dockerfile-git-run" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

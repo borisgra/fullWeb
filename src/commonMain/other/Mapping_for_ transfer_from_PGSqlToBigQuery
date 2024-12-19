@@ -1,0 +1,15 @@
+-- PGSql
+update querys
+set columns = replace(replace(replace(replace(columns,'
+','#1#') ,',','#2#'),'''','#3#'),':','#4#'),
+heading = replace(replace(replace(replace(heading,'
+','#1#') ,',','#2#'),'''','#3#'),':','#4#'),
+    query = replace(replace(replace(replace(query,'
+','#1#') ,',','#2#'),'''','#3#'),':','#4#')
+
+--GCP BigQuery
+update vpn-gra.query_gra.querys
+set columns =replace(replace(replace(replace(columns,'#1#','\n'),'#2#',','),'#3#','\''),'#4#',':')  ,
+heading =replace(replace(replace(replace(heading,'#1#','\n'),'#2#',','),'#3#','\''),'#4#',':')   ,
+    query =replace(replace(replace(replace(query,'#1#','\n'),'#2#',','),'#3#','\''),'#4#',':')
+where 0=0

@@ -1,0 +1,577 @@
+129,Demo1,bd/animal/jsonPG/demo1,"",Demo 1,Big Animal (PGSQL),"SELECT firstname, lastname, (
+	SELECT LISTAGG(lastname, '', '')
+	FROM employee rt
+	START WITH rt.employeeid=e.reportsto
+	CONNECT BY employeeid = PRIOR reportsto
+	) AS '"chain of command'"
+FROM employee e;"
+16,foodorders_ro,bd/QUERY_BD/jsonPG/v_foodorders,"",Order's feeds,Feed (querym),
+54,feed_type_ro,bd/QUERY_BD/jsonPG/v_feed_type,"",List of dishes,LookUp lists,
+116,animal_invoice,bd/animal/jsonPG/invoice,"",Invoice,Big Animal (PGSQL),""
+113,animal_ArtistsAlbum_ro,bd/animal/jsonPG/artistsAlbum,"",Artist's album,Big Animal (PGSQL),"select (select name from artist ar where ar.artistid = al.artistid ) as artistName,
+title
+from album al
+order by artistname"
+117,animal_ArtistsAlbumCount_ro,bd/animal/jsonPG/artistsAlbumCount,"",Artist's album count,Big Animal (PGSQL),"select (select name from artist ar where ar.artistid = al.artistid ) as artistName,
+count(*) TileCount
+from album al
+group by artistName
+order by artistname"
+35,persons_neon,bd/neon_/jsonPG/v_persons,"headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true;
+headerName: status 123, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor, 
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:false ;
+headerName: user_mail, field: user_mail, editable: true ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter,cellEditor: DatePicker;
+headerName: android_id, field: android_id,editable: false,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: agNumberColumnFilter ;",Clients  - fullWeb (neon_),Feed (querym),
+154,v_foods-bq,"bd/vpn-gra/jsonPG/vpn-gra.query_gra.v_foods/ and ifnull(state,'''') !=''del'' order by 1","",v_foods,BIGQUERY,
+2,feeds,bd/QUERY_BD/jsonPG/v_feeds,"field:feed_id,type: numericColumn,filter: agNumberColumnFilter;
+field:feed_type,cellEditor : agSelectCellEditor, 
+cellEditorParams:v_feed_type;
+field:feed_name,cellClass: cl3;
+field:feed_price,type: numericColumn,filter: agNumberColumnFilter;
+field:feed_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state;
+",Feeds All,Feed (querym),
+122,anymal_list_table,bd/animal/jsonPG/list_table,"", Tables ALL list,Big Animal (PGSQL),"SELECT table_name as table_name_   --,table_type
+FROM information_schema.tables
+where table_schema = ''public''
+and table_type = ''BASE TABLE''
+order by 1"
+48,"","","","Feed (querym),External",All Query,""
+159,--test3,"","name + '"-++--'" + name",LookUp lists,jsr223,
+158,--test2,"","import javax.script.ScriptEngineManager
+import javax.script.Invocable
+val engine = ScriptEngineManager().getEngineByExtension('"kts'")
+println(engine .eval('"1+2+102'"))
+
+/*  println(engine .eval('"${this::class.java.name}.shouldBeVisibleFromRepl'")) */","Feed (querym),External",jsr223,
+120,info,https://www.enterprisedb.com/docs/biganimal/latest/using_cluster/06_demonstration_oracle_compatibility,"", INFO **,Big Animal (PGSQL),
+41,v_users_ro,bd/daas_nma/jsonPG/v_users/ order by id desc limit 50,"field:id,type: numericColumn,filter: agNumberColumnFilter ;
+field:status;
+field:company;
+field:address;
+field:country;
+field:person_name;
+field:phone;
+field:account_google;
+field:write_date,filter: agDateColumnFilter ;
+field:user_mail;
+field:android_id;
+field:town;
+field:brand_material;
+field:region;
+",User Rednois(last 50) *,SOUNDPROOFING,""
+128,Demo2,bd/animal/jsonPG/demo2,"",Demo 2,Big Animal (PGSQL),"SELECT UNIQUE title,
+       ROUND(AVG(bytes) OVER (PARTITION BY mediatypeid)/1048576 ) media_avg_mb,
+       LISTAGG(t.name || '' ('' || ROUND(bytes/1048576) || '' mb)'', chr(10))
+         WITHIN GROUP (ORDER BY trackid)
+         OVER (PARTITION BY title)  track_list
+FROM track t
+JOIN album USING (albumid)
+JOIN mediatype USING (mediatypeid)
+WHERE lower(title) LIKE ''%baby%''
+ORDER BY title"
+156,anymal_table_name,bd/animal/jsonPG/{table_name_},"", Table  {table_name_} !!!,Big Animal (PGSQL),
+115,submenu,"","",LookUp lists,Development,
+152,query_gra.v_querys,bd/vpn-gra/jsonPG/vpn-gra.query_gra.v_querys,"field:id,editable: false,width:61; 
+field:query, wrapText: true,autoHeight:true,width:260 ;
+field:name; 
+field:columns,cellEditor: agLargeTextCellEditor; field:heading; 
+field:submenu; field:_sql,editable:false,headerName:SQL,width:100;",query_gra.v_querys,BIGQUERY,
+53,client_status_ro,bd/QUERY_BD/jsonPG/v_status,"field:param,headerName:Status;
+",Client status,LookUp lists,
+157,--test1,"","import kotlin.math.*
+import javax.script.ScriptEngineManager
+import javax.script.Invocable
+val engine = ScriptEngineManager().getEngineByExtension('"kts'")
+
+val boundValue = 10100
+val x = 1001
+val z = 103
+println(13.0 + boundValue + x + z)
+//println(12 + boundValue*100)
+/* put('"boundValue'", 101)*/
+       val res1 = engine.eval('"'"'"
+            fun fn(x: Int) = x + 2
+            val myobj = object {
+                fun fn1(x: Int) = x + 3
+            }
+            myobj'"'"'".trimIndent())
+val invocator = engine as? Invocable
+println(invocator!!.invokeFunction('"fn'", 300))
+println(invocator!!.invokeMethod(res1, '"fn1'", 30000))
+
+'"ALL OK !  sin='" +sin(1.0)
+","Development,Errors",jsr223,
+153,v_persons-bq,"bd/vpn-gra/jsonPG/vpn-gra.query_gra.v_persons/ and ifnull(state,'''') !=''del''  order by 1","headerName: id pers, field: id,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120;
+headerName: STATUS !, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor, 
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:false ;
+headerName: user_mail, field: user_mail, editable: true,cellClass: cl3 ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter,cellEditor: DatePicker;
+headerName: android_id, field: android_id,editable: false,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: agNumberColumnFilter ;",v_persons,BIGQUERY,
+47,"","","","Development,Errors,Feed (cocroach),Big Animal (PGSQL)",Construction,
+111,anymal_employee,bd/animal/jsonPG/employee,"field:employeeid,type: numericColumn,filter: agNumberColumnFilter ;
+field:lastname;
+field:firstname;
+field:title;
+field:reportsto,type: numericColumn,filter: agNumberColumnFilter ;
+field:birthdate,filter: agDateColumnFilter ;
+field:hiredate,filter: agDateColumnFilter ;
+field:address;
+field:city;
+field:state;
+field:country;
+field:postalcode;
+field:phone;
+field:fax;
+field:email;
+",Employee,Big Animal (PGSQL),""
+36,foods>464_neon,bd/neon_/jsonPG/v_foods/and person_id >=464,"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:person_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;",foods >= 464 (neon_),Feed (querym),
+17,v_history_today_ro,bd/daas_nma/jsonPG/v_history/ and  date(write_date)=current_date  order by id desc,"field:id,type: numericColumn,filter: agNumberColumnFilter,width:80 ;
+field:noiseparty_tag;
+field:description;
+field:write_date,filter: agDateColumnFilter ;
+field:info,width:360;
+field:record_id,type: numericColumn,filter: agNumberColumnFilter,width:80 ;
+field:user_mail,width:80;
+field:android_id,width:80;
+field:car_plate;
+field:user_country,width:60;
+field:address,width:80;
+field:person_name;
+field:phone;
+field:town;
+field:car_brand;
+field:car_model;
+field:car_country;
+field:car_type;
+field:car_manuf_year,type: numericColumn,filter: agNumberColumnFilter;
+field:record_utc,type: numericColumn,filter: agNumberColumnFilter;
+field:tags;
+field:company;
+",History Rednois TODAY,SOUNDPROOFING,
+112,animal_customer,bd/animal/jsonPG/customer,"field:customerid,type: numericColumn,filter: agNumberColumnFilter ;
+field:firstname;
+field:lastname;
+field:company;
+field:address;
+field:city;
+field:state;
+field:country;
+field:postalcode;
+field:phone;
+field:fax;
+field:email;
+field:supportrepid,type: numericColumn,filter: agNumberColumnFilter ;
+",Customer,Big Animal (PGSQL),""
+14,v_history_interval_ro,bd/daas_nma/jsonPG/v_history/ and  date(write_date)>='{@dateFrom}' and  date(write_date)<='{@dateTo}' order by id desc,"field:id,type: numericColumn,filter: agNumberColumnFilter,width:80 ;
+field:noiseparty_tag;
+field:description;
+field:write_date,filter: agDateColumnFilter ;
+field:info,width:360;
+field:record_id,type: numericColumn,filter: agNumberColumnFilter,width:80 ;
+field:user_mail,width:80;
+field:android_id,width:80;
+field:car_plate;
+field:user_country,width:60;
+field:address,width:80;
+field:person_name;
+field:phone;
+field:town;
+field:car_brand;
+field:car_model;
+field:car_country;
+field:car_type;
+field:car_manuf_year,type: numericColumn,filter: agNumberColumnFilter ;
+field:record_utc,type: numericColumn,filter: agNumberColumnFilter ;
+field:tags;
+field:company;
+",History Rednois {@dateFrom}-{@dateTo},SOUNDPROOFING,
+126,feeds_n_noBase,bd/myBase/jsonPG/v_feeds/ order by name,"field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_type,cellEditor : agSelectCellEditor, 
+cellEditorParams:v_feed_type;
+field:feed_name;
+field:feed_price,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state,type: numericColumn,filter: agNumberColumnFilter ;
+",feeds_n order (Error no ENV),Errors,
+155,v_feeds-bq,"bd/vpn-gra/jsonPG/vpn-gra.query_gra.v_feeds/ and ifnull(state,'''') !=''del'' order by 1","",v_feeds,BIGQUERY,
+127,foods>2464,bd/QUERY_BD/jsonPG/v_foods/and person_id >=1464,"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:person_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;",foods >= 1464(Empty result),Errors,
+114,v_querys,bd/QUERY_BD/jsonPG/v_querys,"field:id,editable: false,width:60; 
+field:query, wrapText: true,autoHeight:true,width:260 ;
+field:name; 
+field:columns,cellEditor: agLargeTextCellEditor; field:heading; 
+field:submenu; field:_sql,editable:false,headerName:SQL,width:100;",Queries,Development,""
+99,foods_all,bd/QUERY_BD/jsonPG/v_foodsedit,"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:personid,type: numericColumn,filter: agNumberColumnFilter ;
+field:feedid,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter,dateFormat: yyyy-MM-dd HH:mm:ss  ;
+field:write_date,filter: agDateColumnFilter,dateFormat: yyyy-MM-dd''T''HH:mm:ss  ;
+field:write_user;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;",foods All,Feed (querym),
+13,foods_by_person,bd/QUERY_BD/jsonPG/v_foods/and  person_id = {id},"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:person_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter;",foods by  {person_name}  *,Feed (querym),
+5,foodorders_person_ro,bd/QUERY_BD/jsonPG/v_foodorders/ and person_id = {id},"",Order's feeds by person {person_name},Feed (querym),
+55,feeds_n,bd/QUERY_BD/jsonPG/v_feeds_err,"field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_type,cellEditor : agSelectCellEditor, 
+cellEditorParams:v_feed_type;
+field:feed_name;
+field:feed_price,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state,type: numericColumn,filter: agNumberColumnFilter ;
+",feeds_n (Error in SQL),Errors,
+3,persons,bd/QUERY_BD/jsonPG/v_persons,"headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true;
+headerName: STATUS !, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor, 
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:false ;
+headerName: user_mail, field: user_mail, editable: true,cellClass: cl3 ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter,cellEditor: DatePicker;
+headerName: android_id, field: android_id,editable: false,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: agNumberColumnFilter ;",Clients  - fullWeb,Feed (querym),
+98,Olympic winners (Error),https://www.ag-grid.com/example-assets/olympic-winners_err.json,"field:athlete;
+field:age,type: numericColumn,filter: agNumberColumnFilter ;
+field:country;
+field:year,type: numericColumn,filter: agNumberColumnFilter ;
+field:date,filter: agDateColumnFilter ;
+field:sport;
+field:gold,type: numericColumn,filter: agNumberColumnFilter ;
+field:silver,type: numericColumn,filter: agNumberColumnFilter ;
+field:bronze,type: numericColumn,filter: agNumberColumnFilter ;
+field:total,type: numericColumn,filter: agNumberColumnFilter ;
+",Olympic winners (Error in QUERY),Errors,
+18,v_history_lastMonth_ro,"bd/daas_nma/jsonPG/v_history/ and  date(write_date)>=cast(TO_CHAR(NOW(), ''yyyy-mm-01'')as date) order by id desc","field:id,type: numericColumn,filter: agNumberColumnFilter,width:80 ;
+field:noiseparty_tag;
+field:description;
+field:write_date,filter: agDateColumnFilter ;
+field:info,width:360;
+field:record_id,type: numericColumn,filter: agNumberColumnFilter,width:80 ;
+field:user_mail,width:80;
+field:android_id,width:80;
+field:car_plate;
+field:user_country,width:60;
+field:address,width:80;
+field:person_name;
+field:phone;
+field:town;
+field:car_brand;
+field:car_model;
+field:car_country;
+field:car_type;
+field:car_manuf_year,type: numericColumn,filter: agNumberColumnFilter ;
+field:record_utc,type: numericColumn,filter: agNumberColumnFilter ;
+field:tags;
+field:company;
+",History Rednois Current month,SOUNDPROOFING,
+1,anymal_table_name,bd/animal/jsonPG/{table_name_},"", Table  {table_name_} !!!,Big Animal (PGSQL),select * from {table_name_}  -- limit 1 OFFSET 2987
+76,v_history_last50_ro,bd/daas_nma/jsonPG/v_history/ order by id desc limit 50,"field:id,type: numericColumn,filter: agNumberColumnFilter,width:80 ;
+field:noiseparty_tag;
+field:description;
+field:write_date,filter: agDateColumnFilter ;
+field:info,width:360;
+field:record_id,type: numericColumn,filter: agNumberColumnFilter,width:80 ;
+field:user_mail,width:80;
+field:android_id,width:80;
+field:car_plate;
+field:user_country,width:60;
+field:address,width:80;
+field:person_name;
+field:phone;
+field:town;
+field:car_brand;
+field:car_model;
+field:car_country;
+field:car_type;
+field:car_manuf_year,type: numericColumn,filter: agNumberColumnFilter ;
+field:record_utc,type: numericColumn,filter: agNumberColumnFilter ;
+field:tags;
+field:company;
+",History Rednois(last 50),SOUNDPROOFING,
+20,--v_history_lastMonth2_ro,bd/daas_nma/jsonPG/v_history/ and  date(write_date)>=cast(extract(year from NOW())||'-'||extract(month from NOW())||'-01' as date) order by id desc,"field:id,type: numericColumn,filter: agNumberColumnFilter,width:80 ;
+field:noiseparty_tag;
+field:description;
+field:write_date,filter: agDateColumnFilter ;
+field:info;
+field:record_id,type: numericColumn,filter: agNumberColumnFilter,width:80 ;
+field:user_mail;
+field:android_id;
+field:car_plate;
+field:user_country;
+field:address;
+field:person_name;
+field:phone;
+field:town;
+field:car_brand;
+field:car_model;
+field:car_country;
+field:car_type;
+field:car_manuf_year,type: numericColumn,filter: agNumberColumnFilter ;
+field:record_utc,type: numericColumn,filter: agNumberColumnFilter ;
+field:tags;
+field:company;
+",History Rednois Current month2,SOUNDPROOFING,
+8,--feed_list_table,bd/QUERY_BD/jsonPG/list_table,"", Tables ALL list,Feed (querym),"SELECT table_name--,table_type
+FROM information_schema.tables
+where table_schema = ''public''
+and table_type = ''BASE TABLE''
+order by 1"
+4,---feedsByPerson,bd/QUERY_BD/jsonPG/v_feeds/ and person_id = {id},"field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_type,cellEditor : agSelectCellEditor, 
+cellEditorParams:v_feed_type;
+field:feed_name;
+field:feed_price,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state,type: numericColumn,filter: agNumberColumnFilter ;
+",Foods by person {person_name} not work,Feed (querym),
+7,--feed_table_name,bd/QUERY_BD/jsonPG/{table_name_},"", Table  {table_name_},Feed (querym),select * from {table_name_}  -- limit 1 OFFSET 2987
+24,persons-co,bd/croach_fo/jsonPG/fd_persons,"headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true;
+headerName: status 123, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor, 
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:false ;
+headerName: user_mail, field: user_mail, editable: true ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter,cellEditor: DatePicker;
+headerName: android_id, field: android_id,editable: false,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: agNumberColumnFilter ;",Clients  - fullWeb  (Co),Feed (cocroach),
+28,foods_all-co,bd/croach_fo/jsonPG/v_foods,"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:person_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;",foods All (Co),Feed (cocroach),
+32,daas_fo_,,,,,postgres://foUser:ablamtinas+12345@db.daas.team:443/fo
+33,persons_daas,bd/daas_fo_/jsonPG/v_persons,"headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true;
+headerName: status 123, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor, 
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:false ;
+headerName: user_mail, field: user_mail, editable: true ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter,cellEditor: DatePicker;
+headerName: android_id, field: android_id,editable: false,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: agNumberColumnFilter ;",Clients  - fullWeb (daas_fo_),Feed (querym),
+23,feeds-co,"bd/croach_fo/jsonPG/fd_feeds/ and coalesce(state,'''') != ''del''","field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_type,cellEditor : agSelectCellEditor, 
+cellEditorParams:v_feed_type;
+field:feed_name;
+field:feed_price,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state,type: numericColumn,filter: agNumberColumnFilter ;
+",Foods for Order (Co),Feed (cocroach),
+30,--,"","","",Feed (cocroach),
+26,foods_by_person-co,bd/croach_fo/jsonPG/fd_foods/and  person_id = {id},"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:person_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;",foods by  (Co) {person_name}  *,Feed (cocroach),
+25,foods_interval-co,bd/croach_fo/jsonPG/fd_foods/and  food_date >= '{@dateFrom}' and cast(food_date  as date) <= '{@dateTo}',"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:person_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:feed_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;",foods  (Co) {@dateFrom} - {@dateTo},Feed (cocroach),
+34,neon_,,,,,postgres://fo_user:HwAJ7FseEZ6K@ep-aged-wind-326026.ap-southeast-1.aws.neon.tech/fo
+6,foods_interval,bd/QUERY_BD/jsonPG/v_foodsedit/and  food_date >= '{@dateFrom}' and cast(food_date  as date) <= '{@dateTo}',"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:personid,type: numericColumn,filter: agNumberColumnFilter ;
+field:feedid,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter ;
+field:write_user;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;",foods  {@dateFrom} - {@dateTo},Feed (querym),
+37,v_users_working_ro,bd/daas_nma/jsonPG/v_users_working/ order by tests_count desc ,"field:id,type: numericColumn,filter: agNumberColumnFilter,width:70 ;
+field:status;
+field:person_name;
+field:date_last,filter: agDateColumnFilter ;
+field:tests_count,type: numericColumn,filter: agNumberColumnFilter,width:70 ;
+field:company;
+field:country;",Users WORKING !,SOUNDPROOFING,
+15,olympic-winners_ro,https://www.ag-grid.com/example-assets/olympic-winners.json,"",Olympic winners (from lihk),External,
+167,foods_464_koyeb,bd/koyebdb/jsonPG/v_foodsedit/and personid >=464,"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:personid,type: numericColumn,filter: agNumberColumnFilter ;
+field:feedid,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter,dateFormat_1: yyyy-MM-dd''T''HH:mm:ss  ;
+field:write_user,headerName:Write User;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;",foods >= 464 (koyeb),Feed (querym),
+40,v_users_working_curr_year_ro,"bd/daas_nma/jsonPG/v_users_working/   and  date(date_last)>=cast(TO_CHAR(NOW(), ''yyyy-01-01'') as date) order by tests_count desc ","field:id,type: numericColumn,filter: agNumberColumnFilter,width:70 ;
+field:status;
+field:person_name;
+field:date_last,filter: agDateColumnFilter ;
+field:tests_count,type: numericColumn,filter: agNumberColumnFilter,width:70 ;
+field:company;
+field:country;",Users WORKING current Year,SOUNDPROOFING,
+163,persons_neon_koyeb,bd/koyebdb/jsonPG/v_persons,"headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true;
+headerName: status 123, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor, 
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:false ;
+headerName: user_mail, field: user_mail, editable: true ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter,cellEditor: DatePicker;
+headerName: android_id, field: android_id,editable: false,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: agNumberColumnFilter ;",Clients  - fullWeb (koyeb),Feed (querym),
+125,foods>464,bd/QUERY_BD/jsonPG/v_foodsedit/and personid >=464,"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:personid,type: numericColumn,filter: agNumberColumnFilter ;
+field:feedid,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter,dateFormat_1: yyyy-MM-dd''T''HH:mm:ss  ;
+field:write_user,headerName:Write User;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;",foods >= 464,Feed (querym),
+168,v_persons_order_yb,bd/yu_querys/jsonPG/v_persons,"headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true,type: rightAligned;
+headerName: Статус, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor, 
+cellEditorParams:feedmaker.foodmaker.admin, headerClass: cl3;
+headerName: person_name, field: person_name,wrapText: false,autoHeight: false ;
+headerName: user_mail, field: user_mail, editable: true, headerClass: cl1, cellClass: cl1;
+headerName: write_date, field: write_date, filter: agDateColumnFilter ;
+headerName: android_id, field: android_id,editable: true ,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80;
+",without Clients (YB),All Query,
+39,country_codes,"bd/vpn-gra/jsonPG/bigquery-public-data.country_codes.country_codes / and starts_with(alpha_2_code,''A'')","",Country codes startwith  'A',BIGQUERY,
+45,feed_type,bd/QUERY_BD/jsonPG/v_feed_type/ and param like '%вар%',"",Don't use % in query,Errors,
+38,v_history_for_person_name_ro,bd/daas_nma/jsonPG/v_history/ and person_name= '{person_name}' order by write_date desc,"field:id,type: numericColumn,filter: agNumberColumnFilter,width:80 ;
+field:noiseparty_tag;
+field:description;
+field:write_date,filter: agDateColumnFilter ;
+field:info,width:360;
+field:record_id,type: numericColumn,filter: agNumberColumnFilter,width:80 ;
+field:user_mail,width:80;
+field:android_id,width:80;
+field:car_plate;
+field:user_country,width:60;
+field:address,width:80;
+field:person_name;
+field:phone;
+field:town;
+field:car_brand;
+field:car_model;
+field:car_country;
+field:car_type;
+field:car_manuf_year,type: numericColumn,filter: agNumberColumnFilter ;
+field:record_utc,type: numericColumn,filter: agNumberColumnFilter ;
+field:tags;
+field:company;
+",History Rednois FOR {person_name},SOUNDPROOFING,
+46,"","","","",SOUNDPROOFING,
+169,persons_neon_koyeb_host,https://query-gra.koyeb.app/bd/koyebdb/jsonPG/v_persons,"headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true;
+headerName: status 123, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor, 
+cellEditorParams:v_status ;
+headerName: person_name, field: person_name,wrapText: true,autoHeight:false ;
+headerName: user_mail, field: user_mail, editable: true ;
+headerName: write_date, field: write_date, filter: agDateColumnFilter,cellEditor: DatePicker;
+headerName: android_id, field: android_id,editable: false,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80,filter: agNumberColumnFilter ;",Clients  - fullWeb (koyeb -host),Feed (querym),
+49,v_users_working_curr_month_ro,"bd/daas_nma/jsonPG/v_users_working/   and  date(date_last)>=cast(TO_CHAR(NOW(), ''yyyy-mm-01'') as date) order by tests_count desc ","field:id,type: numericColumn,filter: agNumberColumnFilter,width:70 ;
+field:status;
+field:person_name;
+field:date_last,filter: agDateColumnFilter ;
+field:tests_count,type: numericColumn,filter: agNumberColumnFilter,width:70 ;
+field:company;
+field:country;",Users WORKING current month,SOUNDPROOFING,
+50,"","","","",BIGQUERY,
+151,country_codes_all,bd/vpn-gra/jsonPG/bigquery-public-data.country_codes.country_codes ,"",Country codes All,BIGQUERY,
+77,v_persons_order,bd/QUERY_BD/jsonPG/v_persons,"headerName: id pers, field: id,rowDrag: true,filter: agNumberColumnFilter,editable: false, pinned: left,
+    type: numericColumn, width: 120,checkboxSelection: true,type: rightAligned;
+headerName: Статус, field: status,type: rightAligned, editable: true , headerTooltip:Статус клиента (admin главный), cellEditor : agSelectCellEditor, 
+cellEditorParams:feedmaker.foodmaker.admin, headerClass: cl3;
+headerName: person_name, field: person_name,wrapText: false,autoHeight: false ;
+headerName: user_mail, field: user_mail, editable: true, headerClass: cl1, cellClass: cl1;
+headerName: write_date, field: write_date, filter: agDateColumnFilter ;
+headerName: android_id, field: android_id,editable: true ,cellEditor: agLargeTextCellEditor;
+headerName: Write User, field: write_user, width: 80;
+",without Clients,All Query,"select * from v_persons
+where status in (''admin'',''feedmaker'',''foodmaker'')"
+171,foods_464_koyeb_host,https://query-gra.koyeb.app/bd/koyebdb/jsonPG/v_foodsedit/and personid >=464,"field:food_id,type: numericColumn,filter: agNumberColumnFilter ;
+field:personid,type: numericColumn,filter: agNumberColumnFilter ;
+field:feedid,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_qty,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_amount,type: numericColumn,filter: agNumberColumnFilter ;
+field:food_date,filter: agDateColumnFilter ;
+field:write_date,filter: agDateColumnFilter,dateFormat_1: yyyy-MM-dd''T''HH:mm:ss  ;
+field:write_user,headerName:Write User;
+field:android_id;
+field:state;
+field:food_price,type: numericColumn,filter: agNumberColumnFilter ;",foods >= 464 (koyeb - host),Feed (querym),
+170,persons_neon_koyeb_l,https://query-gra.web.app?q=persons_neon_koyeb,"",Clients  - fullWeb (koyeb - link) **,Feed (querym),
+173,foods_464_koyeb_l,https://query-gra.web.app?q=foods_464_koyeb,"",foods >= 464 (koyeb - link) **,Feed (querym),
